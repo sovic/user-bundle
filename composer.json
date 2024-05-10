@@ -19,6 +19,9 @@
         "doctrine/dbal": "^4.0",
         "symfony/cache": "^7.0",
         "symfony/form": "^7.0",
-        "symfony/framework-bundle": "^7.0"
+        "symfony/framework-bundle": "^7.0",
+        "symfony/translation": "^7.0",
+        "symfony/security-bundle": "^7.0",
+        "symfony/mailer": "^7.0"
     }
 }
