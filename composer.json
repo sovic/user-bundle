@@ -22,6 +22,8 @@
         "symfony/framework-bundle": "^7.0",
         "symfony/translation": "^7.0",
         "symfony/security-bundle": "^7.0",
-        "symfony/mailer": "^7.0"
+        "symfony/mailer": "^7.0",
+        "symfony/twig-bundle": "^7.0",
+        "symfony/twig-bridge": "^7.0"
     }
 }

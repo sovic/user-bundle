@@ -81,7 +81,7 @@ class SignUp extends AbstractType
                 [
                     'label' => 'form.sign_up.terms',
                     'label_translation_parameters' => [
-                        '%terms_url%' => $this->router->generate('page_terms'),
+                        // '%terms_url%' => $this->router->generate('page_terms'),
                     ],
                     'required' => true,
                     'label_html' => true,
