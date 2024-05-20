@@ -3,12 +3,6 @@
 namespace UserBundle\Controller\Trait;
 
 // use UserBundle\Email\EmailManager;
-use UserBundle\Entity\User;
-use UserBundle\Form\Type\SignIn;
-use UserBundle\Form\Type\ForgotPassword;
-use UserBundle\Form\Type\NewPassword;
-use UserBundle\Form\Type\SignUp;
-use UserBundle\User\UserFactory;
 use DateTimeImmutable;
 use Doctrine\Persistence\ManagerRegistry;
 use Egulias\EmailValidator\EmailValidator;
@@ -21,13 +15,19 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Contracts\Translation\TranslatorInterface;
+use UserBundle\Entity\User;
+use UserBundle\Form\Type\ForgotPassword;
+use UserBundle\Form\Type\NewPassword;
+use UserBundle\Form\Type\SignIn;
+use UserBundle\Form\Type\SignUp;
+use UserBundle\User\UserFactory;
 
 trait UserControllerTrait
 {
     #[Route('/user/dashboard', name: 'user_dashboard')]
     public function dashboard(): Response
     {
-        return $this->render('page/user/dashboard.html.twig');
+        return $this->render('user/dashboard.html.twig');
     }
 
     #[Route('/user/sign-in', name: 'user_sign_in')]
@@ -54,7 +54,7 @@ trait UserControllerTrait
         $this->assign('last_username', $lastUsername);
         $this->assign('sign_in_form', $signInForm->createView());
 
-        return $this->render('page/user/sign-in.html.twig');
+        return $this->render('user/sign-in.html.twig');
     }
 
     /**
@@ -68,8 +68,7 @@ trait UserControllerTrait
         UserFactory                 $userFactory,
         UserPasswordHasherInterface $passwordHasher,
         TranslatorInterface         $translator
-    ): Response
-    {
+    ): Response {
         if (null !== $this->getUser()) {
             return $this->redirectToRoute('user_files_index');
         }
@@ -120,8 +119,7 @@ trait UserControllerTrait
         string              $code,
         UserFactory         $userFactory,
         TranslatorInterface $translator
-    ): Response
-    {
+    ): Response {
         $user = $userFactory->loadByActivationCode($code);
         if (null === $user) {
             $this->addFlash('error', $translator->trans('user.activation.invalid_code'));
@@ -145,8 +143,7 @@ trait UserControllerTrait
         Request             $request,
         UserFactory         $userFactory,
         TranslatorInterface $translator
-    ): Response
-    {
+    ): Response {
         if (null !== $this->getUser()) {
             return $this->redirectToRoute('user_files_index');
         }
@@ -176,8 +173,7 @@ trait UserControllerTrait
         UserFactory                 $userFactory,
         TranslatorInterface         $translator,
         UserPasswordHasherInterface $passwordHasher
-    ): Response
-    {
+    ): Response {
         if (null !== $this->getUser()) {
             return $this->redirectToRoute('user_files_index');
         }
