@@ -9,8 +9,7 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use UserBundle\User\UserRepository;
 
-#[ORM\MappedSuperclass]
-#[ORM\Entity(repositoryClass: UserRepository::class)]
+#[ORM\MappedSuperclass(repositoryClass: UserRepository::class)]
 abstract class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -27,7 +26,7 @@ abstract class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: Types::STRING, length: 255)]
     protected string $password;
 
-    #[ORM\Column(name: "create_date", type: Types::DATETIME_IMMUTABLE, nullable: false, options: ["default" => "CURRENT_DATE()"])]
+    #[ORM\Column(name: "create_date", type: Types::DATETIME_IMMUTABLE, nullable: false)]
     protected DateTimeImmutable $createDate;
 
     #[ORM\Column(name: "email_verification_code", type: Types::STRING, length: 32, unique: true, nullable: true, options: ["default" => null])]
@@ -55,6 +54,11 @@ abstract class User implements UserInterface, PasswordAuthenticatedUserInterface
     protected ?string $forgotPasswordCode = null;
 
     protected array $roles = [];
+
+    public function __construct()
+    {
+        $this->createDate = new DateTimeImmutable();
+    }
 
     /**
      * @see UserInterface

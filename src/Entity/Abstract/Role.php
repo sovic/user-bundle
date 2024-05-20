@@ -6,7 +6,6 @@ use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\MappedSuperclass]
-#[ORM\Entity]
 #[ORM\Table(name: "role")]
 abstract class Role
 {
@@ -30,11 +29,16 @@ abstract class Role
     #[ORM\Column(name: "is_deletable", type: "boolean", nullable: false, options: ["default" => true])]
     protected bool $isDeletable = true;
 
-    #[ORM\Column(name: "create_date", type: "datetime_immutable", nullable: false, options: ["default" => "CURRENT_DATE()"])]
+    #[ORM\Column(name: "create_date", type: "datetime_immutable", nullable: false)]
     protected DateTimeImmutable $createDate;
 
     #[ORM\Column(name: "update_date", type: "datetime_immutable", nullable: true, options: ["default" => null])]
     protected ?DateTimeImmutable $updateDate = null;
+
+    public function __construct()
+    {
+        $this->createDate = new DateTimeImmutable();
+    }
 
     public function getId(): int
     {
