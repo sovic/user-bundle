@@ -1,0 +1,22 @@
+{% extends '@UserBundle/emails/layout.html.twig' %}
+
+{% block content %}
+    <h1>{{ 'user.sign_up.email.heading'|trans({}, 'user-bundle') }}</h1>
+    <p style="{{ text_style }}">
+        {{ 'user.sign_up.email.text'|trans({}, 'user-bundle') }}
+    </p>
+    {% if email_verification_code %}
+        <p style="{{ text_style }}">
+            <a href="{{ url('user_verify_email', {'code': email_verification_code}) }}"
+               style="{{ link_style }}">
+                {{ 'user.sign_up.email.button'|trans({}, 'user-bundle') }}
+            </a>
+        </p>
+    {% else %}
+        {% if password %}
+            <p style="{{ text_style }}">
+                {{ 'user.sign_up.email.password'|trans({'%password%': password}, 'user-bundle') }}
+            </p>
+        {% endif %}
+    {% endif %}
+{% endblock %}

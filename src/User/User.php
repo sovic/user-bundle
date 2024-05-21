@@ -9,7 +9,7 @@ use Symfony\Component\Mime\Email;
 use UserBundle\ORM\AbstractEntityModel;
 
 /**
- * @method \UserBundle\Entity\User getEntity()
+ * @property \UserBundle\Entity\User $entity
  */
 class User extends AbstractEntityModel
 {
@@ -17,12 +17,12 @@ class User extends AbstractEntityModel
 
     public function getId(): int
     {
-        return $this->getEntity()->getId();
+        return $this->entity->getId();
     }
 
     public function setEmailVerificationCode(string $salt): void
     {
-        $entity = $this->getEntity();
+        $entity = $this->entity;
 
         $emailVerificationCode = md5($entity->getEmail() . time() . $salt);
         $entity->setEmailVerificationCode($emailVerificationCode);
@@ -30,9 +30,9 @@ class User extends AbstractEntityModel
         $this->flush();
     }
 
-    public function verifyEmail(): void
+    public function setEmailVerified(): void
     {
-        $entity = $this->getEntity();
+        $entity = $this->entity;
 
         $entity->setEmailVerificationCode(null);
         $entity->setEmailVerificationDate(new DateTimeImmutable());
@@ -40,9 +40,15 @@ class User extends AbstractEntityModel
         $this->flush();
     }
 
-    public function generateForgotPasswordCode(string $salt): void
+    public function setEnabled(bool $enabled): void
     {
-        $entity = $this->getEntity();
+        $this->entity->setIsEnabled($enabled);
+        $this->flush();
+    }
+
+    public function setForgotPasswordCode(string $salt): void
+    {
+        $entity = $this->entity;
 
         $forgotPasswordCode = md5($entity->getEmail() . time() . $salt);
         $entity->setForgotPasswordCode($forgotPasswordCode);
@@ -50,65 +56,46 @@ class User extends AbstractEntityModel
         $this->flush();
     }
 
-    public function getRegistrationEmail(?string $password = null): Email
-    {
-        $this->setEmailVerificationCode();
-
-        $entity = $this->getEntity();
-        $createDate = DateTime::createFromImmutable($entity->getCreatedDate());
-
-        return (new TemplatedEmail())
-            ->addTo($entity->getEmail())
-            ->htmlTemplate('emails/signup.html.twig')
-            ->subject($this->translator->trans('user.sign_up.email_subject'))
-            ->context([
-                'activation_code' => !$entity->isActive() ? $entity->getActivationCode() : null,
-                'expiration_date' => $createDate->modify('+7 days'),
-                'password' => $password,
-                'subject' => $this->translator->trans('user.sign_up.email_subject'),
-            ]);
-    }
-
-    public function getForgotPasswordEmail(): Email
-    {
-        $this->generateForgotPasswordCode();
-        $entity = $this->getEntity();
-
-        return (new TemplatedEmail())
-            ->addTo($entity->getEmail())
-            ->htmlTemplate('emails/forgot-password.html.twig')
-            ->subject($this->translator->trans('user.forgot_password.email_subject'))
-            ->context([
-                'forgot_password_code' => $entity->getForgotPasswordCode(),
-                'subject' => $this->translator->trans('user.forgot_password.email_subject'),
-            ]);
-    }
-
-    public function usePayment(Payment $payment): void
-    {
-        if ($payment->isUsed()) {
-            return;
+    public function getRegistrationEmail(
+        string  $template = '@UserBundle/emails/sign-up.html.twig',
+        ?string $password = null
+    ): Email {
+        $entity = $this->entity;
+        $verificationCode = $entity->getEmailVerificationCode();
+        if (!$verificationCode) {
+            throw new LogicException('Email verification code is not set');
         }
 
-        $entity = $this->getEntity();
-        $months = $payment->getPriceLevel()->getPremiumMonths();
-        $endDate = $entity->getPremiumEndDate();
-        $previousPremiumStartDate = DateTime::createFromImmutable($endDate ?? new DateTimeImmutable());
-        $previousPremiumStartDate->modify('+' . $months . ' months');
-        $entity->setPremiumEndDate(DateTimeImmutable::createFromMutable($previousPremiumStartDate));
-        $entity->setPremium(true);
-        $this->entityManager->persist($this->getEntity());
-        $payment->setIsUsed(true);
-        $payment->setUserId($this->getId());
-        $payment->setState(Payment::STATE_PAID);
-        $this->entityManager->persist($payment);
-        $this->entityManager->flush();
+        $createDate = DateTime::createFromImmutable($entity->getCreateDate());
+
+        return (new TemplatedEmail())
+            ->addTo($entity->getEmail())
+            ->htmlTemplate($template)
+            ->subject($this->translator->trans('user.sign_up.email.subject', [], 'user-bundle'))
+            ->context([
+                'email_verification_code' => !$entity->getEmailVerificationDate() ? $verificationCode : null,
+                'expiration_date' => $createDate->modify('+7 days'),
+                'password' => $password,
+                'subject' => $this->translator->trans('user.sign_up.email.subject', [], 'user-bundle'),
+            ]);
     }
 
-    public function canDisplayCdnFileInfo(): bool
-    {
-        $roles = $this->getEntity()->getRoles();
+    public function getForgotPasswordEmail(
+        string $template = '@UserBundle/emails/forgot-password.html.twig',
+    ): Email {
+        $entity = $this->entity;
+        $code = $entity->getForgotPasswordCode();
+        if (!$code) {
+            throw new LogicException('Forgot password code is not set');
+        }
 
-        return in_array(self::ROLE_ADMIN, $roles, true);
+        return (new TemplatedEmail())
+            ->addTo($entity->getEmail())
+            ->htmlTemplate($template)
+            ->subject($this->translator->trans('user.forgot_password.email.subject', [], 'user-bundle'))
+            ->context([
+                'forgot_password_code' => $code,
+                'subject' => $this->translator->trans('user.forgot_password.email.subject', [], 'user-bundle'),
+            ]);
     }
 }

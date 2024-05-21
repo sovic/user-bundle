@@ -1,0 +1,18 @@
+{% extends '@UserBundle/base.html.twig' %}
+
+{% block body %}
+    <section>
+        <div class="container d-flex flex-column">
+            <div class="row">
+                <div class="col-12 py-8 py-md-11">
+
+                    <p class="mb-0 fs-sm text-body-secondary">
+                        <a href="{{ path('user_sign_in') }}">{{ 'user.sign_in.link'|trans({}, 'user-bundle') }}</a>.
+                    </p>
+
+                </div>
+
+            </div>
+        </div>
+    </section>
+{% endblock %}

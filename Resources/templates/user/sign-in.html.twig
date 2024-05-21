@@ -1,0 +1,29 @@
+{% extends '@UserBundle/base.html.twig' %}
+{% form_theme sign_in_form '@UserBundle/forms/form-narrow.html.twig' %}
+
+{% block body %}
+    <section>
+        <div class="container d-flex flex-column">
+            <div class="row">
+                <div class="col-12 py-8 py-md-11">
+
+                    <h1 class="mb-0 fw-bold">
+                        {{ 'user.sign_in.heading'|trans({}, 'user-bundle') }}
+                    </h1>
+                    <p class="mb-6 text-body-secondary">
+                        {{ 'user.sign_in.subtitle'|trans({}, 'user-bundle') }}
+                    </p>
+                    <div class="mb-6">
+                        {{ form(sign_in_form) }}
+                    </div>
+                    <p class="mb-0 fs-sm text-body-secondary">
+                        {{ 'user.sign_in.sign_up_intro'|trans({}, 'user-bundle') }}
+                        <a href="{{ path('user_sign_up') }}">{{ 'user.sign_up.link'|trans({}, 'user-bundle') }}</a>.
+                        <a href="{{ path('user_forgot_password') }}">{{ 'user.forgot_password.link'|trans({}, 'user-bundle') }}</a>
+                    </p>
+
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

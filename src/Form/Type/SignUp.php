@@ -28,6 +28,7 @@ class SignUp extends AbstractType
             'csrf_protection' => true,
             'csrf_field_name' => '_csrf_token',
             'csrf_token_id' => 'sign_in',
+            'translation_domain' => 'user-bundle',
         ]);
     }
 
@@ -39,9 +40,9 @@ class SignUp extends AbstractType
                 'email',
                 EmailType::class,
                 [
-                    'label' => 'form.sign_up.email',
+                    'label' => 'user.sign_up.form.email',
                     'attr' => [
-                        'placeholder' => 'form.sign_up.email',
+                        'placeholder' => 'user.sign_up.form.email',
                     ],
                     'row_attr' => [
                         'class' => 'mb-3',
@@ -55,9 +56,9 @@ class SignUp extends AbstractType
                     'type' => PasswordType::class,
                     'required' => true,
                     'first_options' => [
-                        'label' => 'form.sign_up.password',
+                        'label' => 'user.sign_up.form.password',
                         'attr' => [
-                            'placeholder' => 'form.sign_up.password',
+                            'placeholder' => 'user.sign_up.form.password',
                             'autocomplete' => 'new-password',
                         ],
                         'row_attr' => [
@@ -65,9 +66,9 @@ class SignUp extends AbstractType
                         ],
                     ],
                     'second_options' => [
-                        'label' => 'form.sign_up.password_check',
+                        'label' => 'user.sign_up.form.password_check',
                         'attr' => [
-                            'placeholder' => 'form.sign_up.password_check',
+                            'placeholder' => 'user.sign_up.form.password_check',
                         ],
                         'row_attr' => [
                             'class' => 'mb-3',
@@ -79,7 +80,7 @@ class SignUp extends AbstractType
                 'terms',
                 CheckboxType::class,
                 [
-                    'label' => 'form.sign_up.terms',
+                    'label' => 'user.sign_up.form.terms',
                     'label_translation_parameters' => [
                         // '%terms_url%' => $this->router->generate('page_terms'),
                     ],
@@ -94,7 +95,7 @@ class SignUp extends AbstractType
                 'save',
                 SubmitType::class,
                 [
-                    'label' => 'form.sign_up.submit',
+                    'label' => 'user.sign_up.form.submit',
                     'attr' => [
                         'class' => 'w-100 btn btn-primary',
                     ],

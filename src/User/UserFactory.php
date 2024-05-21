@@ -14,6 +14,7 @@ use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
+
 final class UserFactory extends EntityModelFactory
 {
     protected MailerInterface $mailer;
@@ -29,6 +30,11 @@ final class UserFactory extends EntityModelFactory
         parent::__construct($entityManager, $router, $translator);
         $this->mailer = $mailer;
         $this->passwordHasher = $passwordHasher;
+    }
+
+    public function loadByEntity(UserEntity $entity): User
+    {
+        return $this->loadEntityModel($entity, User::class);
     }
 
     public function loadByAuthUser(UserInterface $user): User
@@ -64,20 +70,20 @@ final class UserFactory extends EntityModelFactory
         );
     }
 
-    public function loadByActivationCode(string $code): ?User
+    public function loadByEmailVerificationCode(string $code): ?User
     {
         /** @var User $user */
         $user = $this->loadModelBy(
             UserEntity::class,
             User::class,
             [
-                'activationCode' => $code,
+                'emailVerificationCode' => $code,
             ]
         );
         if (null === $user) {
             return null;
         }
-        $createdDate = DateTime::createFromImmutable($user->getEntity()->getCreateDate());
+        $createdDate = DateTime::createFromImmutable($user->entity->getCreateDate());
         $now = new DateTime();
         if ($now > $createdDate->modify('+7 days')) {
             return null;

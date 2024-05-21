@@ -13,3 +13,7 @@ indent_size = 4
 [{composer.json,composer.lock}]
 indent_style = space
 indent_size = 4
+
+[*.xlf]
+indent_style = space
+indent_size = 2

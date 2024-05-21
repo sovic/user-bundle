@@ -7,9 +7,17 @@ use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ForgotPassword extends AbstractType
 {
+    public function configureOptions(OptionsResolver $resolver): void
+    {
+        $resolver->setDefaults([
+            'translation_domain' => 'user-bundle',
+        ]);
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->setMethod('POST');
@@ -18,9 +26,9 @@ class ForgotPassword extends AbstractType
                 'email',
                 TextType::class,
                 [
-                    'label' => 'form.forgot_password.email',
+                    'label' => 'user.forgot_password.form.email',
                     'attr' => [
-                        'placeholder' => 'form.forgot_password.email',
+                        'placeholder' => 'user.forgot_password.form.email',
                     ],
                     'row_attr' => [
                         'class' => 'mb-3',
@@ -31,7 +39,7 @@ class ForgotPassword extends AbstractType
                 'save',
                 SubmitType::class,
                 [
-                    'label' => 'form.forgot_password.submit',
+                    'label' => 'user.forgot_password.form.submit',
                     'attr' => [
                         'class' => 'w-100 btn btn-primary',
                     ],

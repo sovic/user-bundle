@@ -7,9 +7,17 @@ use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class NewPassword extends AbstractType
 {
+    public function configureOptions(OptionsResolver $resolver): void
+    {
+        $resolver->setDefaults([
+            'translation_domain' => 'user-bundle',
+        ]);
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->setMethod('POST');
@@ -21,18 +29,18 @@ class NewPassword extends AbstractType
                     'type' => PasswordType::class,
                     'required' => true,
                     'first_options' => [
-                        'label' => 'form.new_password.password',
+                        'label' => 'user.new_password.form.password',
                         'attr' => [
-                            'placeholder' => 'form.new_password.password',
+                            'placeholder' => 'user.new_password.form.password',
                         ],
                         'row_attr' => [
                             'class' => 'mb-3',
                         ],
                     ],
                     'second_options' => [
-                        'label' => 'form.new_password.password_check',
+                        'label' => 'user.new_password.form.password_check',
                         'attr' => [
-                            'placeholder' => 'form.new_password.password_check',
+                            'placeholder' => 'user.new_password.form.password_check',
                         ],
                         'row_attr' => [
                             'class' => 'mb-3',
@@ -44,7 +52,7 @@ class NewPassword extends AbstractType
                 'save',
                 SubmitType::class,
                 [
-                    'label' => 'form.new_password.submit',
+                    'label' => 'user.new_password.form.submit',
                     'attr' => [
                         'class' => 'w-100 btn btn-primary',
                     ],

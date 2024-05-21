@@ -19,6 +19,7 @@ class SignIn extends AbstractType
             'csrf_protection' => true,
             'csrf_field_name' => '_csrf_token',
             'csrf_token_id' => 'sign_in',
+            'translation_domain' => 'user-bundle',
         ]);
     }
 
@@ -30,9 +31,9 @@ class SignIn extends AbstractType
                 'email',
                 EmailType::class,
                 [
-                    'label' => 'form.sign_in.email',
+                    'label' => 'user.sign_in.form.email',
                     'attr' => [
-                        'placeholder' => 'form.sign_in.email',
+                        'placeholder' => 'user.sign_in.form.email',
                     ],
                     'row_attr' => [
                         'class' => 'mb-3',
@@ -43,9 +44,9 @@ class SignIn extends AbstractType
                 'password',
                 PasswordType::class,
                 [
-                    'label' => 'form.sign_in.password',
+                    'label' => 'user.sign_in.form.password',
                     'attr' => [
-                        'placeholder' => 'form.sign_in.password',
+                        'placeholder' => 'user.sign_in.form.password',
                         'autocomplete' => 'current-password',
                     ],
                     'row_attr' => [
@@ -57,10 +58,13 @@ class SignIn extends AbstractType
                 'remember',
                 CheckboxType::class,
                 [
-                    'label' => 'form.sign_in.remember',
+                    'label' => 'user.sign_in.form.remember',
                     'required' => false,
                     'row_attr' => [
                         'class' => 'mb-3',
+                    ],
+                    'attr' => [
+                        'checked' => 'checked',
                     ],
                 ]
             )
@@ -68,7 +72,7 @@ class SignIn extends AbstractType
                 'save',
                 SubmitType::class,
                 [
-                    'label' => 'form.sign_in.submit',
+                    'label' => 'user.sign_in.form.submit',
                     'attr' => [
                         'class' => 'w-100 btn btn-primary',
                     ],

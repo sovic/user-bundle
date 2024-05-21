@@ -2,8 +2,8 @@
 
 namespace UserBundle\Controller\Trait;
 
-// use UserBundle\Email\EmailManager;
 use DateTimeImmutable;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Egulias\EmailValidator\EmailValidator;
 use Egulias\EmailValidator\Validation\RFCValidation;
@@ -11,10 +11,12 @@ use LogicException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
+use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Contracts\Translation\TranslatorInterface;
+use Twig\Environment;
 use UserBundle\Entity\User;
 use UserBundle\Form\Type\ForgotPassword;
 use UserBundle\Form\Type\NewPassword;
@@ -24,25 +26,147 @@ use UserBundle\User\UserFactory;
 
 trait UserControllerTrait
 {
-    #[Route('/user/dashboard', name: 'user_dashboard')]
-    public function dashboard(): Response
-    {
-        return $this->render('user/dashboard.html.twig');
+    protected bool $emailVerificationEnabled = true;
+    protected string $fromEmail = 'noreply@sluzba.cz';
+    protected bool $requiresActivation = false;
+
+    /**
+     * @throws TransportExceptionInterface
+     */
+    #[Route('/user/sign-up', name: 'user_sign_up')]
+    public function signup(
+        EntityManagerInterface      $em,
+        Environment                 $twig,
+        MailerInterface             $mailer,
+        Request                     $request,
+        UserFactory                 $userFactory,
+        UserPasswordHasherInterface $passwordHasher,
+        TranslatorInterface         $t
+    ): Response {
+        if (null !== $this->getUser()) {
+            return $this->redirectToRoute('user_dashboard');
+        }
+
+        $template = 'user/sign-up.html.twig';
+        if (!$twig->getLoader()->exists($template)) {
+            $template = '@UserBundle/user/sign-up.html.twig';
+        }
+
+        $form = $this->createForm(SignUp::class);
+        $form->handleRequest($request);
+        $this->assign('sign_up_form', $form->createView());
+
+        if (!$form->isSubmitted() || !$form->isValid()) {
+            return $this->render($template);
+        }
+
+        $data = $form->getData();
+        $email = $data['email'];
+        $validator = new EmailValidator();
+        if (!$validator->isValid($email, new RFCValidation())) {
+            $this->addFlash('error', $t->trans('user.sign_up.invalid_email', [], 'user-bundle'));
+
+            return $this->render($template);
+        }
+
+        if ($userFactory->loadByEmail($email)) {
+            $this->addFlash('error', $t->trans('user.sign_up.email_exists', [], 'user-bundle'));
+
+            return $this->render($template);
+        }
+
+        $user = new User();
+        $user->setEmail($email);
+        $user->setCreateDate(new DateTimeImmutable());
+        $user->setPassword($passwordHasher->hashPassword($user, $data['password']));
+        $em->persist($user);
+        $em->flush();
+
+        $user = $userFactory->loadByEmail($email);
+        $emailVerificationEnabled = $this->emailVerificationEnabled;
+        if ($emailVerificationEnabled) {
+            // send email verification email
+            $salt = $this->container->get('request_stack')->getCurrentRequest()->server->get('APP_SECRET');
+            $user->setEmailVerificationCode($salt);
+        } else {
+            $user->setEmailVerified();
+        }
+
+        $email = $user->getRegistrationEmail();
+        $email->addFrom($this->fromEmail);
+        $email->addReplyTo($this->fromEmail);
+        $mailer->send($email);
+
+        if ($emailVerificationEnabled) {
+            $msg = 'user.sign_up.success_email_verification';
+        } else {
+            $user->setEmailVerified();
+            if ($this->requiresActivation) {
+                $msg = 'user.sign_up.success_requires_activation';
+            } else {
+                $user->setEnabled(true);
+                $msg = 'user.sign_up.success';
+            }
+        }
+        $this->addFlash('success', $t->trans($msg, [], 'user-bundle'));
+
+        return $this->redirectToRoute('user_sign_up');
+    }
+
+    #[Route('/user/verify-email/{code}', name: 'user_verify_email', requirements: ['code' => '[A-Za-z0-9]{32}'])]
+    public function verifyEmail(
+        string              $code,
+        Environment         $twig,
+        TranslatorInterface $t,
+        UserFactory         $userFactory
+    ): Response {
+        $template = 'user/verify-email.html.twig';
+        if (!$twig->getLoader()->exists($template)) {
+            $template = '@UserBundle/user/verify-email.html.twig';
+        }
+
+        $user = $userFactory->loadByEmailVerificationCode($code);
+        if (null === $user) {
+            $this->addFlash('error', $t->trans('user.verify_email.invalid_code', [], 'user-bundle'));
+
+            return $this->render($template);
+        }
+
+        $user->setEmailVerified();
+
+        if ($this->requiresActivation) {
+            $msg = 'user.verify_email.success_requires_activation';
+        } else {
+            $user->setEnabled(true);
+            $msg = 'user.verify_email.success';
+        }
+        $this->addFlash('success', $t->trans($msg, [], 'user-bundle'));
+
+        return $this->render($template);
     }
 
     #[Route('/user/sign-in', name: 'user_sign_in')]
-    public function signIn(AuthenticationUtils $authenticationUtils, TranslatorInterface $translator): Response
-    {
+    public function signIn(
+        AuthenticationUtils $authenticationUtils,
+        Environment         $twig,
+        TranslatorInterface $t
+    ): Response {
+        $template = 'user/sign-in.html.twig';
+        if (!$twig->getLoader()->exists($template)) {
+            $template = '@UserBundle/user/sign-in.html.twig';
+        }
+
         if (null !== $this->getUser()) {
-            return $this->redirectToRoute('user_files_index');
+            return $this->redirectToRoute('user_dashboard');
         }
 
         // get the login error if there is one
         $formError = null;
         $error = $authenticationUtils->getLastAuthenticationError();
         if ($error) {
-            $formError = $translator->trans($error->getMessageKey(), $error->getMessageData(), 'security');
+            $formError = $t->trans($error->getMessageKey(), $error->getMessageData(), 'security');
         }
+
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
         $signInForm = $this->createForm(SignIn::class);
@@ -54,84 +178,26 @@ trait UserControllerTrait
         $this->assign('last_username', $lastUsername);
         $this->assign('sign_in_form', $signInForm->createView());
 
-        return $this->render('user/sign-in.html.twig');
+        return $this->render($template);
     }
 
-    /**
-     * @throws TransportExceptionInterface
-     */
-    #[Route('/user/sign-up', name: 'user_sign_up')]
-    public function signup(
-        // EmailManager                $emailManager,
-        ManagerRegistry             $registry,
-        Request                     $request,
-        UserFactory                 $userFactory,
-        UserPasswordHasherInterface $passwordHasher,
-        TranslatorInterface         $translator
+    #[Route('/user/dashboard', name: 'user_dashboard')]
+    public function dashboard(
+        Environment $twig
     ): Response {
-        if (null !== $this->getUser()) {
-            return $this->redirectToRoute('user_files_index');
+        // TODO authorization via route check
+        if (null === $this->getUser()) {
+            return $this->redirectToRoute('user_sign_in');
         }
 
-        $form = $this->createForm(SignUp::class);
-        $form->handleRequest($request);
-
-        if (!$form->isSubmitted() || !$form->isValid()) {
-            $this->assign('sign_up_form', $form->createView());
-
-            return $this->render('user/sign-up.html.twig');
+        $template = 'user/dashboard.html.twig';
+        if (!$twig->getLoader()->exists($template)) {
+            $template = '@UserBundle/user/dashboard.html.twig';
         }
 
-        $data = $form->getData();
-        $email = $data['email'];
-        $validator = new EmailValidator();
-        if (!$validator->isValid($email, new RFCValidation())) {
-            $this->addFlash('error', $translator->trans('user.sign_up.invalid_email'));
+        $this->assign('user', $this->getUser());
 
-            return $this->redirectToRoute('user_sign_up');
-        }
-
-        if ($userFactory->loadByEmail($email)) {
-            $this->addFlash('error', $translator->trans('user.sign_up.email_exists'));
-
-            return $this->redirectToRoute('user_sign_up');
-        }
-
-        $user = new User();
-        $user->setEmail($email);
-        $user->setUsername(explode('@', $email, 2)[0]);
-        $user->setCreateDate(new DateTimeImmutable());
-        $user->setPassword($passwordHasher->hashPassword($user, $data['password']));
-        $em = $registry->getManager();
-        $em->persist($user);
-        $em->flush();
-        // send activation email
-        $user = $userFactory->loadByEmail($data['email']);
-        // $emailManager->send($user->getRegistrationEmail());
-        // set flash message
-        $this->addFlash('success', $translator->trans('user.sign_up.success'));
-
-        return $this->redirectToRoute('user_sign_up');
-    }
-
-    #[Route('/user/activate/{code}', name: 'user_activate', requirements: ['code' => '[A-Za-z0-9]{32}'])]
-    public function activate(
-        string              $code,
-        UserFactory         $userFactory,
-        TranslatorInterface $translator
-    ): Response {
-        $user = $userFactory->loadByActivationCode($code);
-        if (null === $user) {
-            $this->addFlash('error', $translator->trans('user.activation.invalid_code'));
-
-            return $this->render('page/homepage.index.html.twig');
-        }
-
-        $user->verifyEmail();
-
-        $this->addFlash('success', $translator->trans('user.activation.activated'));
-
-        return $this->redirectToRoute('homepage_index');
+        return $this->render($template);
     }
 
     /**
@@ -139,67 +205,87 @@ trait UserControllerTrait
      */
     #[Route('/user/forgot-password', name: 'user_forgot_password')]
     public function forgotPassword(
-        // EmailManager        $emailManager,
+        Environment         $twig,
+        MailerInterface     $mailer,
         Request             $request,
-        UserFactory         $userFactory,
-        TranslatorInterface $translator
+        TranslatorInterface $t,
+        UserFactory         $userFactory
     ): Response {
         if (null !== $this->getUser()) {
-            return $this->redirectToRoute('user_files_index');
+            return $this->redirectToRoute('user_dashboard');
         }
+
+        $template = 'user/forgot-password.html.twig';
+        if (!$twig->getLoader()->exists($template)) {
+            $template = '@UserBundle/user/forgot-password.html.twig';
+        }
+
         $form = $this->createForm(ForgotPassword::class);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
             $user = $userFactory->loadByEmail($data['email']);
             if ($user) {
-                // $emailManager->send($user->getForgotPasswordEmail());
-                // set flash message
-                $this->addFlash('success', $translator->trans('user.forgot_password.success'));
+                $salt = $this->container->get('request_stack')->getCurrentRequest()->server->get('APP_SECRET');
+                $user->setForgotPasswordCode($salt);
+
+                $email = $user->getForgotPasswordEmail();
+                $email->addFrom($this->fromEmail);
+                $email->addReplyTo($this->fromEmail);
+                $mailer->send($email);
+
+                $this->addFlash('success', $t->trans('user.forgot_password.success', [], 'user-bundle'));
 
                 return $this->redirectToRoute('user_forgot_password');
             }
-            $this->assign('form_error', $translator->trans('user.forgot_password.invalid_email'));
+            $this->assign('form_error', $t->trans('user.forgot_password.invalid_email', [], 'user-bundle'));
         }
         $this->assign('forgot_password_form', $form->createView());
 
-        return $this->render('user/forgot-password.html.twig');
+        return $this->render($template);
     }
 
     #[Route('/user/new-password/{code}', name: 'user_new_password', requirements: ['code' => '[A-Za-z0-9]{32}'])]
     public function newPassword(
         string                      $code,
+        Environment                 $twig,
         Request                     $request,
+        TranslatorInterface         $t,
         UserFactory                 $userFactory,
-        TranslatorInterface         $translator,
         UserPasswordHasherInterface $passwordHasher
     ): Response {
         if (null !== $this->getUser()) {
-            return $this->redirectToRoute('user_files_index');
+            return $this->redirectToRoute('user_dashboard');
         }
+
+        $template = 'user/new-password.html.twig';
+        if (!$twig->getLoader()->exists($template)) {
+            $template = '@UserBundle/user/new-password.html.twig';
+        }
+
         $user = $userFactory->loadByForgotPasswordCode($code);
         if (null === $user) {
-            $this->assign('form_error', $translator->trans('user.forgot_password.invalid_code'));
+            $this->assign('form_error', $t->trans('user.forgot_password.invalid_code', [], 'user-bundle'));
 
-            return $this->render('user/forgot-password.html.twig');
+            return $this->render($template);
         }
 
         $form = $this->createForm(NewPassword::class);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
-            $user->getEntity()->setPassword($passwordHasher->hashPassword($user->getEntity(), $data['password']));
-            $user->getEntity()->setForgotPasswordCode(null);
-            $user->verifyEmail();
-            // set flash message
-            $this->addFlash('success', $translator->trans('user.new_password.success'));
+            $user->entity->setPassword($passwordHasher->hashPassword($user->entity, $data['password']));
+            $user->entity->setForgotPasswordCode(null);
+            $user->setEmailVerified();
+
+            $this->addFlash('success', $t->trans('user.new_password.success', [], 'user-bundle'));
 
             return $this->redirectToRoute('user_sign_in');
         }
 
         $this->assign('new_password_form', $form->createView());
 
-        return $this->render('user/new-password.html.twig');
+        return $this->render($template);
     }
 
     #[Route('/user/logout', name: 'user_logout')]
