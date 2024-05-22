@@ -4,7 +4,6 @@ namespace UserBundle\Controller\Trait;
 
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\Persistence\ManagerRegistry;
 use Egulias\EmailValidator\EmailValidator;
 use Egulias\EmailValidator\Validation\RFCValidation;
 use LogicException;
@@ -13,7 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Twig\Environment;
@@ -86,7 +85,7 @@ trait UserControllerTrait
         $emailVerificationEnabled = $this->emailVerificationEnabled;
         if ($emailVerificationEnabled) {
             // send email verification email
-            $salt = $this->container->get('request_stack')->getCurrentRequest()->server->get('APP_SECRET');
+            $salt = $request->server->get('APP_SECRET');
             $user->setEmailVerificationCode($salt);
         } else {
             $user->setEmailVerified();
@@ -226,7 +225,7 @@ trait UserControllerTrait
             $data = $form->getData();
             $user = $userFactory->loadByEmail($data['email']);
             if ($user) {
-                $salt = $this->container->get('request_stack')->getCurrentRequest()->server->get('APP_SECRET');
+                $salt = $request->server->get('APP_SECRET');
                 $user->setForgotPasswordCode($salt);
 
                 $email = $user->getForgotPasswordEmail();
