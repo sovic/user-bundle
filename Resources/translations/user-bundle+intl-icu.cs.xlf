@@ -238,6 +238,10 @@
         <source>user.settings.form.username</source>
         <target>Uživatelské jméno</target>
       </trans-unit>
+      <trans-unit id="user.settings.form.is_emailing_enabled">
+        <source>user.settings.form.is_emailing_enabled</source>
+        <target>Zasílání notifikačních e-mailů zapnuto/vypnuto</target>
+      </trans-unit>
       <trans-unit id="user.settings.form.old_password">
         <source>user.settings.form.old_password</source>
         <target>Původní heslo</target>
@@ -253,6 +257,14 @@
       <trans-unit id="user.settings.form.submit">
         <source>user.settings.form.submit</source>
         <target>Uložit</target>
+      </trans-unit>
+      <trans-unit id="user.settings.invalid_password">
+        <source>user.settings.invalid_password</source>
+        <target>Zadané heslo je neplatné!</target>
+      </trans-unit>
+      <trans-unit id="user.settings.invalid_new_password">
+        <source>user.settings.invalid_new_password</source>
+        <target>Nové heslo je neplatné!</target>
       </trans-unit>
     </body>
   </file>

@@ -1,0 +1,25 @@
+{% extends '@UserBundle/base.html.twig' %}
+{% form_theme user_settings_form '@UserBundle/forms/form-narrow.html.twig' %}
+
+{% block body %}
+    {% include('@UserBundle/user/blocks/dashboard-header.html.twig') %}
+
+    <section>
+        <div class="container d-flex flex-column mt-5">
+            <div class="row">
+                <div class="col-12 py-8 py-md-11">
+                    <div class="card card-bleed shadow-light-lg mb-6">
+                        <div class="card-header">
+                            <h4 class="mb-0">
+                                Základní nastavení
+                            </h4>
+                        </div>
+                        <div class="card-body">
+                            {{ form(user_settings_form) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
