@@ -42,7 +42,7 @@ class UserSettings extends AbstractType
                     'label' => 'user.settings.form.is_emailing_enabled',
                     'required' => false,
                     'row_attr' => [
-                        'class' => 'mb-3',
+                        'class' => 'mt-5',
                     ],
                 ]
             )
@@ -52,7 +52,7 @@ class UserSettings extends AbstractType
                 [
                     'label' => 'user.settings.form.submit',
                     'attr' => [
-                        'class' => 'w-100 btn btn-primary',
+                        'class' => 'w-100 btn btn-primary mt-5',
                     ],
                 ]
             );
