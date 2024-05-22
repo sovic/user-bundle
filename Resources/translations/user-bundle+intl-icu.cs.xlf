@@ -204,7 +204,7 @@
         <source>user.new_password.form.password</source>
         <target>Heslo</target>
       </trans-unit>
-      <trans-unit id="user.new_password.form.password_check">`
+      <trans-unit id="user.new_password.form.password_check">
         <source>user.new_password.form.password_check</source>
         <target>Potvrďte heslo</target>
       </trans-unit>
