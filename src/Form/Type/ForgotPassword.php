@@ -26,7 +26,7 @@ class ForgotPassword extends AbstractType
                 'email',
                 TextType::class,
                 [
-                    'label' => 'user.forgot_password.form.email',
+                    'label' => false,
                     'attr' => [
                         'placeholder' => 'user.forgot_password.form.email',
                     ],

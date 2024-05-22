@@ -146,11 +146,11 @@
       </trans-unit>
       <trans-unit id="user.forgot_password.heading">
         <source>user.forgot_password.heading</source>
-        <target>Zapomněli jste heslo</target>
+        <target>Zapomenuté heslo</target>
       </trans-unit>
       <trans-unit id="user.forgot_password.subtitle">
         <source>user.forgot_password.subtitle</source>
-        <target>Zapomněli jste heslo? Se stane. Zadejte svůj e-mail a my vám zašleme odkaz pro nastavení nového hesla.</target>
+        <target>Zapomněli jste heslo? Zadejte svůj e-mail a my vám zašleme odkaz pro nastavení nového hesla.</target>
       </trans-unit>
       <trans-unit id="user.forgot_password.form.email">
         <source>user.forgot_password.form.email</source>
@@ -174,11 +174,11 @@
       </trans-unit>
       <trans-unit id="user.forgot_password.email.subject">
         <source>user.forgot_password.email.subject</source>
-        <target>Zapomněli jste heslo</target>
+        <target>Obnovení hesla</target>
       </trans-unit>
       <trans-unit id="user.forgot_password.email.heading">
         <source>user.forgot_password.email.heading</source>
-        <target>Takže jste zapomněli heslo, jo?</target>
+        <target>Obnovení hesla</target>
       </trans-unit>
       <trans-unit id="user.forgot_password.email.text">
         <source>user.forgot_password.email.text</source>
@@ -188,7 +188,6 @@
         <source>user.forgot_password.email.button</source>
         <target>Kliknutím sem obnovíte heslo</target>
       </trans-unit>
-
       <trans-unit id="user.new_password.heading">
         <source>user.new_password.heading</source>
         <target>Obnovení hesla</target>
@@ -213,7 +212,6 @@
         <source>user.new_password.form.submit</source>
         <target>Obnovit heslo</target>
       </trans-unit>
-
 
       <trans-unit id="user.settings.link">
         <source>user.settings.link</source>
