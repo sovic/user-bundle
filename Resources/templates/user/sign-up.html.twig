@@ -11,7 +11,7 @@
                         {{ 'user.sign_up.heading'|trans({}, 'user-bundle') }}
                     </h1>
                     <p class="mb-6 text-body-secondary">
-                        {{ 'user.sign_up.subtitle'|trans({}, 'user-bundle') }}
+                        {{ 'user.sign_up.subtitle'|trans({}, 'user-bundle')|raw }}
                     </p>
                     <div class="mb-6">
                         {{ form(sign_up_form) }}

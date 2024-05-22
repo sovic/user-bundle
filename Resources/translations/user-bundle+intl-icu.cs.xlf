@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.2"
-       xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 http://docs.oasis-open.org/xliff/v1.2/os/xliff-core-1.2-strict.xsd"
+       xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 https://docs.oasis-open.org/xliff/v1.2/os/xliff-core-1.2-strict.xsd"
        xml:space="preserve">
   <file original="" source-language="cs" target-language="cs" datatype="plaintext">
     <body>
@@ -50,7 +50,7 @@
       </trans-unit>
       <trans-unit id="user.sign_up.invalid_email">
         <source>user.sign_up.invalid_email</source>
-        <target>Neplatná e-mailová adresa</target>
+        <target>Neplatný e-mail</target>
       </trans-unit>
       <trans-unit id="user.sign_up.email.heading">
         <source>user.sign_up.email.heading</source>
@@ -62,7 +62,7 @@
       </trans-unit>
       <trans-unit id="user.sign_up.email.button">
         <source>user.sign_up.email.button</source>
-        <target>Kliknutím aktivujete svůj účet</target>
+        <target>Kliknutím potvrdíte registraci účtu</target>
       </trans-unit>
       <trans-unit id="user.sign_up.email.expire_info">
         <source>user.sign_up.email.expire_info</source>
@@ -86,7 +86,7 @@
       </trans-unit>
       <trans-unit id="user.sign_up.success_email_verification">
         <source>user.sign_up.success_email_verification</source>
-        <target>Účet byl úspěšně vytvořen. Je vyžadována aktivace e-mailu, zkontrolujte prosím svůj e-mailový účet.</target>
+        <target>Účet byl úspěšně vytvořen. Je vyžadováno potvrzení e-mailu, zkontrolujte prosím svůj e-mailový účet.</target>
       </trans-unit>
 
       <trans-unit id="user.verify_email.success_requires_activation">
@@ -150,7 +150,7 @@
       </trans-unit>
       <trans-unit id="user.forgot_password.subtitle">
         <source>user.forgot_password.subtitle</source>
-        <target>Zapomněli jste heslo? Zadejte svůj e-mail a my vám zašleme odkaz pro nastavení nového hesla.</target>
+        <target>Zapomněli jste heslo? Zadejte svůj e-mail a&amp;nbsp;my vám zašleme odkaz pro nastavení nového hesla.</target>
       </trans-unit>
       <trans-unit id="user.forgot_password.form.email">
         <source>user.forgot_password.form.email</source>
@@ -158,7 +158,7 @@
       </trans-unit>
       <trans-unit id="user.forgot_password.form.submit">
         <source>user.forgot_password.form.submit</source>
-        <target>Odešlete ověřovací e-mail</target>
+        <target>Ověřit e-mail</target>
       </trans-unit>
       <trans-unit id="user.forgot_password.invalid_code">
         <source>user.forgot_password.invalid_code</source>
@@ -166,7 +166,7 @@
       </trans-unit>
       <trans-unit id="user.forgot_password.invalid_email">
         <source>user.forgot_password.invalid_email</source>
-        <target>Neplatná e-mailová adresa</target>
+        <target>Neplatný e-mail</target>
       </trans-unit>
       <trans-unit id="user.forgot_password.success">
         <source>user.forgot_password.success</source>
@@ -198,19 +198,24 @@
       </trans-unit>
       <trans-unit id="user.new_password.success">
         <source>user.new_password.success</source>
-        <target>Úspěšné resetování hesla</target>
+        <target>Heslo úspěšně obnoveno</target>
       </trans-unit>
       <trans-unit id="user.new_password.form.password">
         <source>user.new_password.form.password</source>
         <target>Heslo</target>
       </trans-unit>
-      <trans-unit id="user.new_password.form.password_check">
+      <trans-unit id="user.new_password.form.password_check">`
         <source>user.new_password.form.password_check</source>
         <target>Potvrďte heslo</target>
       </trans-unit>
       <trans-unit id="user.new_password.form.submit">
         <source>user.new_password.form.submit</source>
         <target>Obnovit heslo</target>
+      </trans-unit>
+
+      <trans-unit id="user.dashboard.heading">
+        <source>user.dashboard.heading</source>
+        <target>Přehled vašeho profilu</target>
       </trans-unit>
 
       <trans-unit id="user.settings.link">
