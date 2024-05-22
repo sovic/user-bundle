@@ -4,6 +4,7 @@ namespace UserBundle\User;
 
 use DateTime;
 use DateTimeImmutable;
+use LogicException;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Mime\Email;
 use UserBundle\ORM\AbstractEntityModel;

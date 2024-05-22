@@ -15,11 +15,8 @@ use Symfony\Component\Routing\RouterInterface;
 
 class SignUp extends AbstractType
 {
-    private RouterInterface $router;
-
-    public function __construct(RouterInterface $router)
+    public function __construct(private readonly RouterInterface $router)
     {
-        $this->router = $router;
     }
 
     public function configureOptions(OptionsResolver $resolver): void

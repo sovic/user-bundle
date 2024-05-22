@@ -3,7 +3,6 @@
 namespace UserBundle\ORM;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\Exception\ORMException;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Contracts\Service\Attribute\Required;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -51,9 +50,6 @@ abstract class AbstractEntityModel
         $this->entityManager->flush();
     }
 
-    /**
-     * @throws ORMException
-     */
     public function refresh(): void
     {
         $this->entityManager->refresh($this->entity);
