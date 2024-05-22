@@ -31,9 +31,10 @@ class SignIn extends AbstractType
                 'email',
                 EmailType::class,
                 [
-                    'label' => 'user.sign_in.form.email',
+                    'label' => false,
                     'attr' => [
                         'placeholder' => 'user.sign_in.form.email',
+                        'autocomplete' => 'email',
                     ],
                     'row_attr' => [
                         'class' => 'mb-3',
@@ -44,7 +45,7 @@ class SignIn extends AbstractType
                 'password',
                 PasswordType::class,
                 [
-                    'label' => 'user.sign_in.form.password',
+                    'label' => false,
                     'attr' => [
                         'placeholder' => 'user.sign_in.form.password',
                         'autocomplete' => 'current-password',

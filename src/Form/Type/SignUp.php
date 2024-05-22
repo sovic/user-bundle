@@ -40,7 +40,7 @@ class SignUp extends AbstractType
                 'email',
                 EmailType::class,
                 [
-                    'label' => 'user.sign_up.form.email',
+                    'label' => false,
                     'attr' => [
                         'placeholder' => 'user.sign_up.form.email',
                     ],
@@ -56,7 +56,7 @@ class SignUp extends AbstractType
                     'type' => PasswordType::class,
                     'required' => true,
                     'first_options' => [
-                        'label' => 'user.sign_up.form.password',
+                        'label' => false,
                         'attr' => [
                             'placeholder' => 'user.sign_up.form.password',
                             'autocomplete' => 'new-password',
@@ -66,7 +66,7 @@ class SignUp extends AbstractType
                         ],
                     ],
                     'second_options' => [
-                        'label' => 'user.sign_up.form.password_check',
+                        'label' => false,
                         'attr' => [
                             'placeholder' => 'user.sign_up.form.password_check',
                         ],
