@@ -50,6 +50,9 @@ abstract class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(name: "last_login_date", type: Types::DATETIME_IMMUTABLE, nullable: true, options: ["default" => null])]
     protected ?DateTimeImmutable $lastLoginDate = null;
 
+    #[ORM\Column(name: "logins", type: Types::INTEGER, nullable: false, options: ["default" => 0])]
+    protected int $logins = 0;
+
     #[ORM\Column(name: "forgot_password_code", type: Types::STRING, length: 32, unique: true, nullable: true, options: ["default" => null])]
     protected ?string $forgotPasswordCode = null;
 
@@ -230,5 +233,15 @@ abstract class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setForgotPasswordCode(?string $forgotPasswordCode): void
     {
         $this->forgotPasswordCode = $forgotPasswordCode;
+    }
+
+    public function getLogins(): int
+    {
+        return $this->logins;
+    }
+
+    public function setLogins(int $logins): void
+    {
+        $this->logins = $logins;
     }
 }
