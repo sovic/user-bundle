@@ -3,36 +3,40 @@
 namespace UserBundle\Entity\Abstract;
 
 use DateTimeImmutable;
-use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\Column;
+use Doctrine\ORM\Mapping\GeneratedValue;
+use Doctrine\ORM\Mapping\Id;
+use Doctrine\ORM\Mapping\MappedSuperclass;
+use Doctrine\ORM\Mapping\Table;
 
-#[ORM\MappedSuperclass]
-#[ORM\Table(name: "role")]
+#[MappedSuperclass]
+#[Table(name: "role")]
 abstract class Role
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column(type: "integer")]
+    #[Id]
+    #[GeneratedValue]
+    #[Column(type: "integer")]
     protected int $id;
 
-    #[ORM\Column(type: "string", length: 50, unique: true, nullable: false)]
+    #[Column(type: "string", length: 50, unique: true, nullable: false)]
     protected string $name;
 
-    #[ORM\Column(type: "string", length: 180, nullable: true, options: ["default" => null])]
+    #[Column(type: "string", length: 180, nullable: true, options: ["default" => null])]
     protected ?string $description = null;
 
-    #[ORM\Column(name: "is_default", type: "boolean", nullable: false, options: ["default" => false])]
+    #[Column(name: "is_default", type: "boolean", nullable: false, options: ["default" => false])]
     protected bool $isDefault = false;
 
-    #[ORM\Column(name: "is_enabled", type: "boolean", nullable: false, options: ["default" => false])]
+    #[Column(name: "is_enabled", type: "boolean", nullable: false, options: ["default" => false])]
     protected bool $isEnabled = false;
 
-    #[ORM\Column(name: "is_deletable", type: "boolean", nullable: false, options: ["default" => true])]
+    #[Column(name: "is_deletable", type: "boolean", nullable: false, options: ["default" => true])]
     protected bool $isDeletable = true;
 
-    #[ORM\Column(name: "create_date", type: "datetime_immutable", nullable: false)]
+    #[Column(name: "create_date", type: "datetime_immutable", nullable: false)]
     protected DateTimeImmutable $createDate;
 
-    #[ORM\Column(name: "update_date", type: "datetime_immutable", nullable: true, options: ["default" => null])]
+    #[Column(name: "update_date", type: "datetime_immutable", nullable: true, options: ["default" => null])]
     protected ?DateTimeImmutable $updateDate = null;
 
     public function __construct()

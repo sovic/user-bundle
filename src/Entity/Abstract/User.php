@@ -4,56 +4,62 @@ namespace UserBundle\Entity\Abstract;
 
 use DateTimeImmutable;
 use Doctrine\DBAL\Types\Types;
-use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\Column;
+use Doctrine\ORM\Mapping\GeneratedValue;
+use Doctrine\ORM\Mapping\Id;
+use Doctrine\ORM\Mapping\MappedSuperclass;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use UserBundle\User\UserRepository;
 
-#[ORM\MappedSuperclass(repositoryClass: UserRepository::class)]
+#[MappedSuperclass(repositoryClass: UserRepository::class)]
 abstract class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column(type: "integer")]
+    #[Id]
+    #[GeneratedValue]
+    #[Column(type: "integer")]
     protected int $id;
 
-    #[ORM\Column(type: Types::STRING, length: 180, unique: true, nullable: false)]
+    #[Column(type: Types::STRING, length: 180, unique: true, nullable: false)]
     protected string $email;
 
-    #[ORM\Column(type: Types::STRING, length: 180, nullable: true, options: ["default" => null])]
+    #[Column(type: Types::STRING, length: 180, nullable: true, options: ["default" => null])]
     protected ?string $username = null;
 
-    #[ORM\Column(type: Types::STRING, length: 255)]
+    #[Column(type: Types::STRING, length: 255)]
     protected string $password;
 
-    #[ORM\Column(name: "create_date", type: Types::DATETIME_IMMUTABLE, nullable: false)]
+    #[Column(name: "create_date", type: Types::DATETIME_IMMUTABLE, nullable: false)]
     protected DateTimeImmutable $createDate;
 
-    #[ORM\Column(name: "email_verification_code", type: Types::STRING, length: 32, unique: true, nullable: true, options: ["default" => null])]
+    #[Column(name: "email_verification_code", type: Types::STRING, length: 32, unique: true, nullable: true, options: ["default" => null])]
     protected ?string $emailVerificationCode = null;
 
-    #[ORM\Column(name: "email_verification_date", type: Types::DATETIME_IMMUTABLE, nullable: true, options: ["default" => null])]
+    #[Column(name: "email_verification_date", type: Types::DATETIME_IMMUTABLE, nullable: true, options: ["default" => null])]
     protected ?DateTimeImmutable $emailVerificationDate = null;
 
-    #[ORM\Column(name: "country_code", type: Types::STRING, length: 2, nullable: true, options: ["default" => null])]
+    #[Column(name: "country_code", type: Types::STRING, length: 2, nullable: true, options: ["default" => null])]
     protected ?string $countryCode = null;
 
-    #[ORM\Column(name: "locale", type: Types::STRING, length: 10, nullable: true, options: ["default" => null])]
+    #[Column(name: "default_currency", type: Types::STRING, length: 3, nullable: true, options: ["default" => null])]
+    protected ?string $defaultCurrency = null;
+
+    #[Column(name: "locale", type: Types::STRING, length: 10, nullable: true, options: ["default" => null])]
     protected ?string $locale = null;
 
-    #[ORM\Column(name: "is_enabled", type: Types::BOOLEAN, nullable: false, options: ["default" => false])]
+    #[Column(name: "is_enabled", type: Types::BOOLEAN, nullable: false, options: ["default" => false])]
     protected bool $isEnabled = false;
 
-    #[ORM\Column(name: "is_emailing_enabled", type: Types::BOOLEAN, nullable: false, options: ["default" => true])]
+    #[Column(name: "is_emailing_enabled", type: Types::BOOLEAN, nullable: false, options: ["default" => true])]
     protected bool $isEmailingEnabled = true;
 
-    #[ORM\Column(name: "last_login_date", type: Types::DATETIME_IMMUTABLE, nullable: true, options: ["default" => null])]
+    #[Column(name: "last_login_date", type: Types::DATETIME_IMMUTABLE, nullable: true, options: ["default" => null])]
     protected ?DateTimeImmutable $lastLoginDate = null;
 
-    #[ORM\Column(name: "logins", type: Types::INTEGER, nullable: false, options: ["default" => 0])]
+    #[Column(name: "logins", type: Types::INTEGER, nullable: false, options: ["default" => 0])]
     protected int $logins = 0;
 
-    #[ORM\Column(name: "forgot_password_code", type: Types::STRING, length: 32, unique: true, nullable: true, options: ["default" => null])]
+    #[Column(name: "forgot_password_code", type: Types::STRING, length: 32, unique: true, nullable: true, options: ["default" => null])]
     protected ?string $forgotPasswordCode = null;
 
     protected array $roles = [];
@@ -243,5 +249,15 @@ abstract class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setLogins(int $logins): void
     {
         $this->logins = $logins;
+    }
+
+    public function getDefaultCurrency(): ?string
+    {
+        return $this->defaultCurrency;
+    }
+
+    public function setDefaultCurrency(?string $defaultCurrency): void
+    {
+        $this->defaultCurrency = $defaultCurrency;
     }
 }
