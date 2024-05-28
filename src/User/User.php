@@ -47,6 +47,12 @@ class User extends AbstractEntityModel
         $this->flush();
     }
 
+    public function activate(): void
+    {
+        $this->setEmailVerified();
+        $this->setEnabled(true);
+    }
+
     public function setForgotPasswordCode(string $salt): void
     {
         $entity = $this->entity;
