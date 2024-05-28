@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.2"
+       xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 https://docs.oasis-open.org/xliff/v1.2/os/xliff-core-1.2-strict.xsd"
+       xml:space="preserve">
+  <file original="" source-language="en" target-language="en" datatype="plaintext">
+    <body>
+      <trans-unit id="user.sign_up.link">
+        <source>user.sign_up.link</source>
+        <target>Zaregistrujte se</target>
+      </trans-unit>
+      <trans-unit id="user.sign_up.heading">
+        <source>user.sign_up.heading</source>
+        <target>Registrace</target>
+      </trans-unit>
+      <trans-unit id="user.sign_up.subtitle">
+        <source>user.sign_up.subtitle</source>
+        <target>Zabere to jen chvíli.</target>
+      </trans-unit>
+      <trans-unit id="user.sign_up.sign_in_intro">
+        <source>user.sign_up.sign_in_intro</source>
+        <target>Už máte účet?</target>
+      </trans-unit>
+      <trans-unit id="user.sign_up.form.email">
+        <source>user.sign_up.form.email</source>
+        <target>E-mail</target>
+      </trans-unit>
+      <trans-unit id="user.sign_up.form.password">
+        <source>user.sign_up.form.password</source>
+        <target>Heslo</target>
+      </trans-unit>
+      <trans-unit id="user.sign_up.form.password_check">
+        <source>user.sign_up.form.password_check</source>
+        <target>Potvrďte heslo</target>
+      </trans-unit>
+      <trans-unit id="user.sign_up.form.submit">
+        <source>user.sign_up.form.submit</source>
+        <target>Zaregistrujte se</target>
+      </trans-unit>
+      <trans-unit id="user.sign_up.form.terms">
+        <source>user.sign_up.form.terms</source>
+        <target>Souhlasím s &lt;a href="{terms_url}" target="_blank"&gt;podmínkami používání&lt;/a&gt; služby</target>
+      </trans-unit>
+      <trans-unit id="user.sign_up.email_exists">
+        <source>user.sign_up.email_exists</source>
+        <target>Účet pro tento e-mail již existuje</target>
+      </trans-unit>
+      <trans-unit id="user.sign_up.passwords_dont_match">
+        <source>user.sign_up.passwords_dont_match</source>
+        <target>Zadaná hesla se neshodují</target>
+      </trans-unit>
+      <trans-unit id="user.sign_up.invalid_email">
+        <source>user.sign_up.invalid_email</source>
+        <target>Neplatný e-mail</target>
+      </trans-unit>
+      <trans-unit id="user.sign_up.email.heading">
+        <source>user.sign_up.email.heading</source>
+        <target>Vítejte!</target>
+      </trans-unit>
+      <trans-unit id="user.sign_up.email.text">
+        <source>user.sign_up.email.text</source>
+        <target>Zaregistrovali jste se na službu</target>
+      </trans-unit>
+      <trans-unit id="user.sign_up.email.button">
+        <source>user.sign_up.email.button</source>
+        <target>Kliknutím potvrdíte registraci účtu</target>
+      </trans-unit>
+      <trans-unit id="user.sign_up.email.expire_info">
+        <source>user.sign_up.email.expire_info</source>
+        <target>(tento odkaz je platný do %expiration%)</target>
+      </trans-unit>
+      <trans-unit id="user.sign_up.email.password">
+        <source>user.sign_up.email.password</source>
+        <target>Heslo k Vašemu účtu: %password%</target>
+      </trans-unit>
+      <trans-unit id="user.sign_up.email.subject">
+        <source>user.sign_up.email.subject</source>
+        <target>Účet vytvořen</target>
+      </trans-unit>
+      <trans-unit id="user.sign_up.success">
+        <source>user.sign_up.success</source>
+        <target>Účet byl úspěšně vytvořen.</target>
+      </trans-unit>
+      <trans-unit id="user.sign_up.success_requires_activation">
+        <source>user.sign_up.success_requires_activation</source>
+        <target>Účet byl úspěšně vytvořen a čeká na schválení administrátorem.</target>
+      </trans-unit>
+      <trans-unit id="user.sign_up.success_email_verification">
+        <source>user.sign_up.success_email_verification</source>
+        <target>Účet byl úspěšně vytvořen. Je vyžadováno potvrzení e-mailu, zkontrolujte prosím svůj e-mailový účet.</target>
+      </trans-unit>
+
+      <trans-unit id="user.verify_email.success_requires_activation">
+        <source>user.verify_email.success_requires_activation</source>
+        <target>Váš e-mail je potvrzený, účet čeká na schválení administrátorem</target>
+      </trans-unit>
+      <trans-unit id="user.verify_email.success">
+        <source>user.verify_email.success</source>
+        <target>Váš e-mail je potvrzený</target>
+      </trans-unit>
+      <trans-unit id="user.verify_email.invalid_code">
+        <source>user.verify_email.invalid_code</source>
+        <target>Neplatný aktivační kód</target>
+      </trans-unit>
+
+      <trans-unit id="user.sign_in.link">
+        <source>user.sign_in.link</source>
+        <target>Přihlaste se</target>
+      </trans-unit>
+      <trans-unit id="user.sign_in.heading">
+        <source>user.sign_in.heading</source>
+        <target>Přihlásit se</target>
+      </trans-unit>
+      <trans-unit id="user.sign_in.subtitle">
+        <source>user.sign_in.subtitle</source>
+        <target>Přihlaste se ke svému účtu pomocí e-mailu a hesla poskytnutého při registraci.</target>
+      </trans-unit>
+      <trans-unit id="user.sign_in.form.email">
+        <source>user.sign_in.form.email</source>
+        <target>E-mail</target>
+      </trans-unit>
+      <trans-unit id="user.sign_in.form.password">
+        <source>user.sign_in.form.password</source>
+        <target>Heslo</target>
+      </trans-unit>
+      <trans-unit id="user.sign_in.form.submit">
+        <source>user.sign_in.form.submit</source>
+        <target>Přihlásit se</target>
+      </trans-unit>
+      <trans-unit id="user.sign_in.form.remember">
+        <source>user.sign_in.form.remember</source>
+        <target>Zapamatovat přihlášení</target>
+      </trans-unit>
+      <trans-unit id="user.sign_in.sign_up_intro">
+        <source>user.sign_in.sign_up_intro</source>
+        <target>Nemáte účet?</target>
+      </trans-unit>
+
+      <trans-unit id="user.sign_out.link">
+        <source>user.sign_out.link</source>
+        <target>Odhlásit se</target>
+      </trans-unit>
+
+      <trans-unit id="user.forgot_password.link">
+        <source>user.forgot_password.link</source>
+        <target>Zapomněli jste heslo?</target>
+      </trans-unit>
+      <trans-unit id="user.forgot_password.heading">
+        <source>user.forgot_password.heading</source>
+        <target>Zapomenuté heslo</target>
+      </trans-unit>
+      <trans-unit id="user.forgot_password.subtitle">
+        <source>user.forgot_password.subtitle</source>
+        <target>Zapomněli jste heslo? Zadejte svůj e-mail a&amp;nbsp;my vám zašleme odkaz pro nastavení nového hesla.</target>
+      </trans-unit>
+      <trans-unit id="user.forgot_password.form.email">
+        <source>user.forgot_password.form.email</source>
+        <target>Registrační e-mail</target>
+      </trans-unit>
+      <trans-unit id="user.forgot_password.form.submit">
+        <source>user.forgot_password.form.submit</source>
+        <target>Ověřit e-mail</target>
+      </trans-unit>
+      <trans-unit id="user.forgot_password.invalid_code">
+        <source>user.forgot_password.invalid_code</source>
+        <target>Neplatný kód pro zapomenuté heslo</target>
+      </trans-unit>
+      <trans-unit id="user.forgot_password.invalid_email">
+        <source>user.forgot_password.invalid_email</source>
+        <target>Neplatný e-mail</target>
+      </trans-unit>
+      <trans-unit id="user.forgot_password.success">
+        <source>user.forgot_password.success</source>
+        <target>Ověřovací e-mail odeslán</target>
+      </trans-unit>
+      <trans-unit id="user.forgot_password.email.subject">
+        <source>user.forgot_password.email.subject</source>
+        <target>Obnovení hesla</target>
+      </trans-unit>
+      <trans-unit id="user.forgot_password.email.heading">
+        <source>user.forgot_password.email.heading</source>
+        <target>Obnovení hesla</target>
+      </trans-unit>
+      <trans-unit id="user.forgot_password.email.text">
+        <source>user.forgot_password.email.text</source>
+        <target>Klikněte na následující odkaz a obnovte své heslo.</target>
+      </trans-unit>
+      <trans-unit id="user.forgot_password.email.button">
+        <source>user.forgot_password.email.button</source>
+        <target>Kliknutím sem obnovíte heslo</target>
+      </trans-unit>
+      <trans-unit id="user.new_password.heading">
+        <source>user.new_password.heading</source>
+        <target>Obnovení hesla</target>
+      </trans-unit>
+      <trans-unit id="user.new_password.subtitle">
+        <source>user.new_password.subtitle</source>
+        <target>Zadejte nové heslo</target>
+      </trans-unit>
+      <trans-unit id="user.new_password.success">
+        <source>user.new_password.success</source>
+        <target>Úspešné obnovenie hesla</target>
+      </trans-unit>
+      <trans-unit id="user.new_password.form.password">
+        <source>user.new_password.form.password</source>
+        <target>Heslo</target>
+      </trans-unit>
+      <trans-unit id="user.new_password.form.password_check">
+        <source>user.new_password.form.password_check</source>
+        <target>Potvrďte heslo</target>
+      </trans-unit>
+      <trans-unit id="user.new_password.form.submit">
+        <source>user.new_password.form.submit</source>
+        <target>Obnovit heslo</target>
+      </trans-unit>
+
+      <trans-unit id="user.dashboard.heading">
+        <source>user.dashboard.heading</source>
+        <target>Přehled vašeho profilu</target>
+      </trans-unit>
+
+      <trans-unit id="user.settings.link">
+        <source>user.settings.link</source>
+        <target>Nastavení profilu</target>
+      </trans-unit>
+      <trans-unit id="user.settings.heading">
+        <source>user.settings.heading</source>
+        <target>Nastavení profilu</target>
+      </trans-unit>
+      <trans-unit id="user.settings.success">
+        <source>user.settings.success</source>
+        <target>Nastavení uloženo</target>
+      </trans-unit>
+      <trans-unit id="user.settings.new_password_heading">
+        <source>user.settings.new_password_heading</source>
+        <target>Nastavení nového hesla</target>
+      </trans-unit>
+      <trans-unit id="user.settings.form.username">
+        <source>user.settings.form.username</source>
+        <target>Uživatelské jméno</target>
+      </trans-unit>
+      <trans-unit id="user.settings.form.is_emailing_enabled">
+        <source>user.settings.form.is_emailing_enabled</source>
+        <target>Zasílání notifikačních e-mailů zapnuto/vypnuto</target>
+      </trans-unit>
+      <trans-unit id="user.settings.form.submit">
+        <source>user.settings.form.submit</source>
+        <target>Uložit</target>
+      </trans-unit>
+      <trans-unit id="user.settings.new_password.form.old_password">
+        <source>user.settings.new_password.form.old_password</source>
+        <target>Původní heslo</target>
+      </trans-unit>
+      <trans-unit id="user.settings.new_password.form.new_password">
+        <source>user.settings.new_password.form.new_password</source>
+        <target>Nové heslo</target>
+      </trans-unit>
+      <trans-unit id="user.settings.new_password.form.new_password_check">
+        <source>user.settings.new_password.form.new_password_check</source>
+        <target>Potvrzení nového hesla</target>
+      </trans-unit>
+      <trans-unit id="user.settings.new_password.form.submit">
+        <source>user.settings.new_password.form.submit</source>
+        <target>Uložit</target>
+      </trans-unit>
+      <trans-unit id="user.settings.invalid_password">
+        <source>user.settings.invalid_password</source>
+        <target>Zadané heslo je neplatné!</target>
+      </trans-unit>
+      <trans-unit id="user.settings.invalid_new_password">
+        <source>user.settings.invalid_new_password</source>
+        <target>Nové heslo je neplatné!</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
