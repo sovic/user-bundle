@@ -2,10 +2,11 @@
 
 namespace UserBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\MappedSuperclass;
+use UserBundle\Entity\Trait\RoleEntityTrait;
 
-#[ORM\Entity]
-class Role extends Abstract\Role
+#[MappedSuperclass]
+class Role
 {
-
+    use RoleEntityTrait;
 }

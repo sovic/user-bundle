@@ -15,6 +15,11 @@ abstract class AbstractEntityModel
 
     public mixed $entity;
 
+    public function getEntity(): mixed
+    {
+        return $this->entity;
+    }
+
     #[Required]
     public function setEntityManager(EntityManagerInterface $entityManager): void
     {

@@ -1,17 +1,13 @@
 <?php
 
-namespace UserBundle\Entity\Abstract;
+namespace UserBundle\Entity\Trait;
 
 use DateTimeImmutable;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\GeneratedValue;
 use Doctrine\ORM\Mapping\Id;
-use Doctrine\ORM\Mapping\MappedSuperclass;
-use Doctrine\ORM\Mapping\Table;
 
-#[MappedSuperclass]
-#[Table(name: "role")]
-abstract class Role
+trait RoleEntityTrait
 {
     #[Id]
     #[GeneratedValue]

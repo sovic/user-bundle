@@ -1,19 +1,16 @@
 <?php
 
-namespace UserBundle\Entity\Abstract;
+namespace UserBundle\Entity\Trait;
 
 use DateTimeImmutable;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\GeneratedValue;
 use Doctrine\ORM\Mapping\Id;
-use Doctrine\ORM\Mapping\MappedSuperclass;
-use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
-use UserBundle\User\UserRepository;
 
-#[MappedSuperclass(repositoryClass: UserRepository::class)]
-abstract class User implements UserInterface, PasswordAuthenticatedUserInterface
+
+trait UserEntityTrait
 {
     #[Id]
     #[GeneratedValue]

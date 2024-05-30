@@ -14,11 +14,23 @@ use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-
-final class UserFactory extends EntityModelFactory
+class UserFactory extends EntityModelFactory implements UserFactoryInterface
 {
+    protected string $entityClass = UserEntity::class;
+    protected string $modelClass = User::class;
+
     protected MailerInterface $mailer;
     protected UserPasswordHasherInterface $passwordHasher;
+
+    public function setEntityClass(string $entityClass): void
+    {
+        $this->entityClass = $entityClass;
+    }
+
+    public function setModelClass(string $modelClass): void
+    {
+        $this->modelClass = $modelClass;
+    }
 
     public function __construct(
         EntityManagerInterface      $entityManager,
@@ -32,15 +44,15 @@ final class UserFactory extends EntityModelFactory
         $this->passwordHasher = $passwordHasher;
     }
 
-    public function loadByEntity(UserEntity $entity): User
+    public function loadByEntity(UserEntityInterface $entity): UserEntityModelInterface
     {
-        return $this->loadEntityModel($entity, User::class);
+        return $this->loadEntityModel($entity, $this->modelClass);
     }
 
-    public function loadByAuthUser(UserInterface $user): User
+    public function loadByAuthUser(UserInterface $user): UserEntityModelInterface
     {
         // our user entity used for authentication implements UserInterface, simply load model
-        $user = $this->loadEntityModel($user, User::class);
+        $user = $this->loadEntityModel($user, $this->modelClass);
         if (null === $user) {
             throw new RuntimeException('Unable to load user model');
         }
@@ -48,34 +60,34 @@ final class UserFactory extends EntityModelFactory
         return $user;
     }
 
-    public function loadByEmail(string $email): ?User
+    public function loadByEmail(string $email): ?UserEntityModelInterface
     {
         return $this->loadModelBy(
-            UserEntity::class,
-            User::class,
+            $this->entityClass,
+            $this->modelClass,
             [
                 'email' => $email,
             ]
         );
     }
 
-    public function loadByUsername(string $username): ?User
+    public function loadByUsername(string $username): ?UserEntityModelInterface
     {
         return $this->loadModelBy(
-            UserEntity::class,
-            User::class,
+            $this->entityClass,
+            $this->modelClass,
             [
                 'username' => $username,
             ]
         );
     }
 
-    public function loadByEmailVerificationCode(string $code): ?User
+    public function loadByEmailVerificationCode(string $code): ?UserEntityModelInterface
     {
         /** @var User $user */
         $user = $this->loadModelBy(
-            UserEntity::class,
-            User::class,
+            $this->entityClass,
+            $this->modelClass,
             [
                 'emailVerificationCode' => $code,
             ]
@@ -92,12 +104,12 @@ final class UserFactory extends EntityModelFactory
         return $user;
     }
 
-    public function loadByForgotPasswordCode(string $code): ?User
+    public function loadByForgotPasswordCode(string $code): ?UserEntityModelInterface
     {
         /** @var User $user */
         $user = $this->loadModelBy(
-            UserEntity::class,
-            User::class,
+            $this->entityClass,
+            $this->modelClass,
             [
                 'forgotPasswordCode' => $code,
             ]

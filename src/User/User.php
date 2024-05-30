@@ -11,8 +11,9 @@ use UserBundle\ORM\AbstractEntityModel;
 
 /**
  * @property \UserBundle\Entity\User $entity
+ * @method \UserBundle\Entity\User getEntity()
  */
-class User extends AbstractEntityModel
+class User extends AbstractEntityModel implements UserEntityModelInterface
 {
     public const ROLE_ADMIN = 'ROLE_ADMIN';
 

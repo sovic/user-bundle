@@ -21,7 +21,7 @@ use UserBundle\Form\Type\ForgotPassword;
 use UserBundle\Form\Type\NewPassword;
 use UserBundle\Form\Type\SignIn;
 use UserBundle\Form\Type\SignUp;
-use UserBundle\User\UserFactory;
+use UserBundle\User\UserFactoryInterface;
 
 trait UserControllerTrait
 {
@@ -38,7 +38,7 @@ trait UserControllerTrait
         Environment                 $twig,
         MailerInterface             $mailer,
         Request                     $request,
-        UserFactory                 $userFactory,
+        UserFactoryInterface        $userFactory,
         UserPasswordHasherInterface $passwordHasher,
         TranslatorInterface         $t
     ): Response {
@@ -114,10 +114,10 @@ trait UserControllerTrait
 
     #[Route('/user/verify-email/{code}', name: 'user_verify_email', requirements: ['code' => '[A-Za-z0-9]{32}'])]
     public function verifyEmail(
-        string              $code,
-        Environment         $twig,
-        TranslatorInterface $t,
-        UserFactory         $userFactory
+        string               $code,
+        Environment          $twig,
+        TranslatorInterface  $t,
+        UserFactoryInterface $userFactory
     ): Response {
         $template = 'user/verify-email.html.twig';
         if (!$twig->getLoader()->exists($template)) {
@@ -204,11 +204,11 @@ trait UserControllerTrait
      */
     #[Route('/user/forgot-password', name: 'user_forgot_password')]
     public function forgotPassword(
-        Environment         $twig,
-        MailerInterface     $mailer,
-        Request             $request,
-        TranslatorInterface $t,
-        UserFactory         $userFactory
+        Environment          $twig,
+        MailerInterface      $mailer,
+        Request              $request,
+        TranslatorInterface  $t,
+        UserFactoryInterface $userFactory
     ): Response {
         if (null !== $this->getUser()) {
             return $this->redirectToRoute('user_dashboard');
@@ -250,7 +250,7 @@ trait UserControllerTrait
         Environment                 $twig,
         Request                     $request,
         TranslatorInterface         $t,
-        UserFactory                 $userFactory,
+        UserFactoryInterface        $userFactory,
         UserPasswordHasherInterface $passwordHasher
     ): Response {
         if (null !== $this->getUser()) {
