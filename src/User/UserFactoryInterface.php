@@ -6,6 +6,10 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 interface UserFactoryInterface
 {
+    public function setEntityClass(string $entityClass): void;
+
+    public function setModelClass(string $modelClass): void;
+
     public function loadByEntity(UserEntityInterface $entity): UserEntityModelInterface;
 
     public function loadByAuthUser(UserInterface $user): ?UserEntityModelInterface;
