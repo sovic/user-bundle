@@ -44,11 +44,6 @@ class UserFactory extends EntityModelFactory implements UserFactoryInterface
         $this->passwordHasher = $passwordHasher;
     }
 
-    public function loadByEntity(UserEntityInterface $entity): UserModelInterface
-    {
-        return $this->loadEntityModel($entity, $this->modelClass);
-    }
-
     public function loadByAuthUser(UserInterface $user): UserModelInterface
     {
         // our user entity used for authentication implements UserInterface, simply load model
@@ -67,17 +62,6 @@ class UserFactory extends EntityModelFactory implements UserFactoryInterface
             $this->modelClass,
             [
                 'email' => $email,
-            ]
-        );
-    }
-
-    public function loadByUsername(string $username): ?UserModelInterface
-    {
-        return $this->loadModelBy(
-            $this->entityClass,
-            $this->modelClass,
-            [
-                'username' => $username,
             ]
         );
     }
@@ -104,6 +88,22 @@ class UserFactory extends EntityModelFactory implements UserFactoryInterface
         return $user;
     }
 
+    public function loadByEntity(UserEntityInterface $entity): UserModelInterface
+    {
+        return $this->loadEntityModel($entity, $this->modelClass);
+    }
+
+    public function loadById(int $id): ?UserModelInterface
+    {
+        return $this->loadModelBy(
+            $this->entityClass,
+            $this->modelClass,
+            [
+                'id' => $id,
+            ]
+        );
+    }
+
     public function loadByForgotPasswordCode(string $code): ?UserModelInterface
     {
         /** @var User $user */
@@ -116,6 +116,17 @@ class UserFactory extends EntityModelFactory implements UserFactoryInterface
         );
 
         return $user ?? null;
+    }
+
+    public function loadByUsername(string $username): ?UserModelInterface
+    {
+        return $this->loadModelBy(
+            $this->entityClass,
+            $this->modelClass,
+            [
+                'username' => $username,
+            ]
+        );
     }
 
     public function createNew(string $email, string $password): User
