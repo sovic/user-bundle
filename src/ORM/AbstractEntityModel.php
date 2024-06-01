@@ -24,7 +24,7 @@ abstract class AbstractEntityModel
         $this->entityManager = $entityManager;
     }
 
-    protected function getEntityManager(): EntityManagerInterface
+    public function getEntityManager(): EntityManagerInterface
     {
         return $this->entityManager;
     }
