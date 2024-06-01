@@ -8,6 +8,7 @@ use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use UserBundle\Form\FormSettings;
 
 class NewPassword extends AbstractType
 {
@@ -42,9 +43,6 @@ class NewPassword extends AbstractType
                         'attr' => [
                             'placeholder' => 'user.new_password.form.password_check',
                         ],
-                        'row_attr' => [
-                            'class' => 'mb-3',
-                        ],
                     ],
                 ]
             )
@@ -54,7 +52,7 @@ class NewPassword extends AbstractType
                 [
                     'label' => 'user.new_password.form.submit',
                     'attr' => [
-                        'class' => 'w-100 btn btn-primary',
+                        'class' => FormSettings::SUBMIT_CLASS,
                     ],
                 ]
             );

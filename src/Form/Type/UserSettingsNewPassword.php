@@ -8,6 +8,7 @@ use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use UserBundle\Form\FormSettings;
 
 class UserSettingsNewPassword extends AbstractType
 {
@@ -26,15 +27,12 @@ class UserSettingsNewPassword extends AbstractType
                 'password',
                 PasswordType::class,
                 [
-                    'required' => false,
                     'label' => 'user.settings.new_password.form.old_password',
                     'attr' => [
                         'placeholder' => 'user.settings.new_password.form.old_password',
                         'autocomplete' => 'off',
                     ],
-                    'row_attr' => [
-                        'class' => 'mb-3',
-                    ],
+                    'required' => true,
                 ]
             )
             ->add(
@@ -42,25 +40,21 @@ class UserSettingsNewPassword extends AbstractType
                 RepeatedType::class,
                 [
                     'type' => PasswordType::class,
-                    'required' => false,
+                    'required' => true,
                     'first_options' => [
                         'label' => 'user.settings.new_password.form.new_password',
                         'attr' => [
                             'placeholder' => 'user.settings.new_password.form.new_password',
                             'autocomplete' => 'new-password',
                         ],
-                        'row_attr' => [
-                            'class' => 'mb-3',
-                        ],
+                        'required' => true,
                     ],
                     'second_options' => [
                         'label' => 'user.settings.new_password.form.new_password_check',
                         'attr' => [
                             'placeholder' => 'user.settings.new_password.form.new_password_check',
                         ],
-                        'row_attr' => [
-                            'class' => 'mb-3',
-                        ],
+                        'required' => true,
                     ],
                 ]
             )
@@ -70,7 +64,7 @@ class UserSettingsNewPassword extends AbstractType
                 [
                     'label' => 'user.settings.new_password.form.submit',
                     'attr' => [
-                        'class' => 'w-100 btn btn-primary mt-5',
+                        'class' => FormSettings::SUBMIT_CLASS,
                     ],
                 ]
             );

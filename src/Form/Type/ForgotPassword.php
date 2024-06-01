@@ -8,6 +8,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use UserBundle\Form\FormSettings;
 
 class ForgotPassword extends AbstractType
 {
@@ -30,9 +31,6 @@ class ForgotPassword extends AbstractType
                     'attr' => [
                         'placeholder' => 'user.forgot_password.form.email',
                     ],
-                    'row_attr' => [
-                        'class' => 'mb-3',
-                    ],
                 ]
             )
             ->add(
@@ -41,7 +39,7 @@ class ForgotPassword extends AbstractType
                 [
                     'label' => 'user.forgot_password.form.submit',
                     'attr' => [
-                        'class' => 'w-100 btn btn-primary',
+                        'class' => FormSettings::SUBMIT_CLASS,
                     ],
                 ]
             );

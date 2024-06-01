@@ -12,6 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Routing\RouterInterface;
+use UserBundle\Form\FormSettings;
 
 class SignUp extends AbstractType
 {
@@ -41,9 +42,6 @@ class SignUp extends AbstractType
                     'attr' => [
                         'placeholder' => 'user.sign_up.form.email',
                     ],
-                    'row_attr' => [
-                        'class' => 'mb-3',
-                    ],
                 ]
             )
             ->add(
@@ -58,17 +56,11 @@ class SignUp extends AbstractType
                             'placeholder' => 'user.sign_up.form.password',
                             'autocomplete' => 'new-password',
                         ],
-                        'row_attr' => [
-                            'class' => 'mb-3',
-                        ],
                     ],
                     'second_options' => [
                         'label' => false,
                         'attr' => [
                             'placeholder' => 'user.sign_up.form.password_check',
-                        ],
-                        'row_attr' => [
-                            'class' => 'mb-3',
                         ],
                     ],
                 ]
@@ -83,9 +75,6 @@ class SignUp extends AbstractType
                     ],
                     'required' => true,
                     'label_html' => true,
-                    'row_attr' => [
-                        'class' => 'mb-3',
-                    ],
                 ]
             )
             ->add(
@@ -94,7 +83,7 @@ class SignUp extends AbstractType
                 [
                     'label' => 'user.sign_up.form.submit',
                     'attr' => [
-                        'class' => 'w-100 btn btn-primary',
+                        'class' => FormSettings::SUBMIT_CLASS,
                     ],
                 ]
             );

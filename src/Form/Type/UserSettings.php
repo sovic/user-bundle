@@ -8,6 +8,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use UserBundle\Form\FormSettings;
 
 class UserSettings extends AbstractType
 {
@@ -30,9 +31,7 @@ class UserSettings extends AbstractType
                     'attr' => [
                         'placeholder' => 'user.settings.form.username',
                     ],
-                    'row_attr' => [
-                        'class' => 'mb-3',
-                    ],
+                    'required' => false,
                 ]
             )
             ->add(
@@ -41,9 +40,6 @@ class UserSettings extends AbstractType
                 [
                     'label' => 'user.settings.form.is_emailing_enabled',
                     'required' => false,
-                    'row_attr' => [
-                        'class' => 'mt-5',
-                    ],
                 ]
             )
             ->add(
@@ -52,7 +48,7 @@ class UserSettings extends AbstractType
                 [
                     'label' => 'user.settings.form.submit',
                     'attr' => [
-                        'class' => 'w-100 btn btn-primary mt-5',
+                        'class' => FormSettings::SUBMIT_CLASS,
                     ],
                 ]
             );

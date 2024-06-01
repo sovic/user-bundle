@@ -10,6 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use UserBundle\Form\FormSettings;
 
 class SignIn extends AbstractType
 {
@@ -36,9 +37,6 @@ class SignIn extends AbstractType
                         'placeholder' => 'user.sign_in.form.email',
                         'autocomplete' => 'email',
                     ],
-                    'row_attr' => [
-                        'class' => 'mb-3',
-                    ],
                 ]
             )
             ->add(
@@ -49,9 +47,6 @@ class SignIn extends AbstractType
                     'attr' => [
                         'placeholder' => 'user.sign_in.form.password',
                         'autocomplete' => 'current-password',
-                    ],
-                    'row_attr' => [
-                        'class' => 'mb-3',
                     ],
                 ]
             )
@@ -75,7 +70,7 @@ class SignIn extends AbstractType
                 [
                     'label' => 'user.sign_in.form.submit',
                     'attr' => [
-                        'class' => 'w-100 btn btn-primary',
+                        'class' => FormSettings::SUBMIT_CLASS,
                     ],
                 ]
             );
