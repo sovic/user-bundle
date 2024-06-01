@@ -44,12 +44,12 @@ class UserFactory extends EntityModelFactory implements UserFactoryInterface
         $this->passwordHasher = $passwordHasher;
     }
 
-    public function loadByEntity(UserEntityInterface $entity): UserEntityModelInterface
+    public function loadByEntity(UserEntityInterface $entity): UserModelInterface
     {
         return $this->loadEntityModel($entity, $this->modelClass);
     }
 
-    public function loadByAuthUser(UserInterface $user): UserEntityModelInterface
+    public function loadByAuthUser(UserInterface $user): UserModelInterface
     {
         // our user entity used for authentication implements UserInterface, simply load model
         $user = $this->loadEntityModel($user, $this->modelClass);
@@ -60,7 +60,7 @@ class UserFactory extends EntityModelFactory implements UserFactoryInterface
         return $user;
     }
 
-    public function loadByEmail(string $email): ?UserEntityModelInterface
+    public function loadByEmail(string $email): ?UserModelInterface
     {
         return $this->loadModelBy(
             $this->entityClass,
@@ -71,7 +71,7 @@ class UserFactory extends EntityModelFactory implements UserFactoryInterface
         );
     }
 
-    public function loadByUsername(string $username): ?UserEntityModelInterface
+    public function loadByUsername(string $username): ?UserModelInterface
     {
         return $this->loadModelBy(
             $this->entityClass,
@@ -82,7 +82,7 @@ class UserFactory extends EntityModelFactory implements UserFactoryInterface
         );
     }
 
-    public function loadByEmailVerificationCode(string $code): ?UserEntityModelInterface
+    public function loadByEmailVerificationCode(string $code): ?UserModelInterface
     {
         /** @var User $user */
         $user = $this->loadModelBy(
@@ -104,7 +104,7 @@ class UserFactory extends EntityModelFactory implements UserFactoryInterface
         return $user;
     }
 
-    public function loadByForgotPasswordCode(string $code): ?UserEntityModelInterface
+    public function loadByForgotPasswordCode(string $code): ?UserModelInterface
     {
         /** @var User $user */
         $user = $this->loadModelBy(

@@ -10,13 +10,13 @@ interface UserFactoryInterface
 
     public function setModelClass(string $modelClass): void;
 
-    public function loadByEntity(UserEntityInterface $entity): UserEntityModelInterface;
+    public function loadByEntity(UserEntityInterface $entity): UserModelInterface;
 
-    public function loadByAuthUser(UserInterface $user): ?UserEntityModelInterface;
+    public function loadByAuthUser(UserInterface $user): ?UserModelInterface;
 
-    public function loadByEmail(string $email): ?UserEntityModelInterface;
+    public function loadByEmail(string $email): ?UserModelInterface;
 
-    public function loadByEmailVerificationCode(string $code): ?UserEntityModelInterface;
+    public function loadByEmailVerificationCode(string $code): ?UserModelInterface;
 
-    public function loadByForgotPasswordCode(string $code): ?UserEntityModelInterface;
+    public function loadByForgotPasswordCode(string $code): ?UserModelInterface;
 }

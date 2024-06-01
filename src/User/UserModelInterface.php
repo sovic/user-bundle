@@ -2,7 +2,7 @@
 
 namespace UserBundle\User;
 
-interface UserEntityModelInterface
+interface UserModelInterface
 {
 
 }
