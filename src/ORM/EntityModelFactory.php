@@ -9,9 +9,9 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 abstract class EntityModelFactory
 {
     public function __construct(
-        private readonly EntityManagerInterface $entityManager,
-        private readonly RouterInterface        $router,
-        private readonly TranslatorInterface    $translator
+        protected readonly EntityManagerInterface $entityManager,
+        protected readonly RouterInterface        $router,
+        protected readonly TranslatorInterface    $translator
     ) {
     }
 
