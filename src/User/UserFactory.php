@@ -129,14 +129,13 @@ class UserFactory extends EntityModelFactory implements UserFactoryInterface
         );
     }
 
-    public function createNew(string $email, string $password): User
+    public function createNew(string $email, string $password): UserModelInterface
     {
         $user = new UserEntity();
         $user->setEmail($email);
-        $user->setUsername(explode('@', $email, 2)[0]);
         $user->setCreateDate(new DateTimeImmutable());
         $user->setPassword($this->passwordHasher->hashPassword($user, $password));
 
-        return $this->loadEntityModel($user, User::class);
+        return $this->loadEntityModel($user, $this->modelClass);
     }
 }
