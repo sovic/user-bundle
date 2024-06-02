@@ -2,19 +2,20 @@
 
 namespace UserBundle\Command;
 
+use Exception;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ChoiceQuestion;
-use Symfony\Component\Console\Question\Question;
-use UserBundle\User\User;
+use UserBundle\Command\Trait\UserCommandTrait;
 use UserBundle\User\UserFactoryInterface;
 use UserBundle\UserRole\UserRoleManager;
-use UserBundle\Validation\EmailValidator;
 
 final class AssignRole extends Command
 {
+    use UserCommandTrait;
+
     public function __construct(
         private readonly UserFactoryInterface $userFactory
     ) {
@@ -26,37 +27,21 @@ final class AssignRole extends Command
         $this
             ->setName('user:assign-role')
             ->setDescription('Adds role for user (interactively).')
-            ->addArgument('id', InputArgument::OPTIONAL)
+            ->addArgument('id', InputArgument::OPTIONAL, 'User id/e-mail')
             ->addArgument('role', InputArgument::OPTIONAL);
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
+        try {
+            $user = $this->loadUserFromInput($input, $output, $this->userFactory);
+        } catch (Exception $e) {
+            $output->writeln($e->getMessage());
+
+            return Command::FAILURE;
+        }
+
         $helper = $this->getHelper('question');
-        $id = $input->getArgument('id');
-        /** @var User $user */
-        $user = null;
-        if (empty($id)) {
-            $question = new Question('User id/e-mail: ');
-            $id = $helper->ask($input, $output, $question);
-        }
-        if (empty($id)) {
-            $output->writeln('Invalid id');
-
-            return Command::FAILURE;
-        }
-        if (EmailValidator::validate($id) === true) {
-            $user = $this->userFactory->loadByEmail($id);
-        }
-        if (null === $user) {
-            $user = $this->userFactory->loadById($id);
-        }
-        if (null === $user) {
-            $output->writeln('User [' . $id . '] not found');
-
-            return Command::FAILURE;
-        }
-
         $role = $input->getArgument('role');
         if (null === $role) {
             $question = new ChoiceQuestion(
