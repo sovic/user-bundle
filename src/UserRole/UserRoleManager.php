@@ -2,6 +2,7 @@
 
 namespace UserBundle\UserRole;
 
+use InvalidArgumentException;
 use UserBundle\Entity\UserRole;
 use UserBundle\Entity\UserRoleRelation;
 use UserBundle\User\UserModelInterface;
@@ -40,6 +41,9 @@ class UserRoleManager
     public function hasRole(string|UserRole $role): bool
     {
         $role = $this->getRole($role);
+        if (!$role) {
+            throw new InvalidArgumentException('Role not found');
+        }
         $roles = $this->getRoles();
 
         return array_key_exists($role->getName(), $roles);
@@ -48,6 +52,9 @@ class UserRoleManager
     public function addRole(string|UserRole $role): bool
     {
         $role = $this->getRole($role);
+        if (!$role) {
+            throw new InvalidArgumentException('Role not found');
+        }
         $roles = $this->getRoles(true);
         if (array_key_exists($role->getName(), $roles)) {
             return true;
@@ -67,6 +74,9 @@ class UserRoleManager
     public function removeRole(string|UserRole $role): bool
     {
         $role = $this->getRole($role);
+        if (!$role) {
+            throw new InvalidArgumentException('Role not found');
+        }
         $roles = $this->getRoles(true);
         if (!array_key_exists($role->getName(), $roles)) {
             return true;
@@ -88,7 +98,7 @@ class UserRoleManager
         return true;
     }
 
-    private function getRole(string|UserRole $role): UserRole
+    private function getRole(string|UserRole $role): ?UserRole
     {
         if ($role instanceof UserRole) {
             return $role;
