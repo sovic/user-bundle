@@ -2,16 +2,16 @@
 
 namespace UserBundle\Entity;
 
-use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\Id;
 use Doctrine\ORM\Mapping\Index;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\ManyToOne;
+use Doctrine\ORM\Mapping\MappedSuperclass;
 use UserBundle\Entity\Trait\CreatedAtTrait;
 use UserBundle\User\UserEntityInterface;
 use UserBundle\UserRole\UserRoleEntityInterface;
 
-#[Entity]
+#[MappedSuperclass]
 #[Index(columns: ['user_id'], name: 'user_id')]
 #[Index(columns: ['role_id'], name: 'role_id')]
 class UserRoleRelation
