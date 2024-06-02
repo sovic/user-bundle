@@ -8,6 +8,7 @@ use LogicException;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Mime\Email;
 use UserBundle\ORM\AbstractEntityModel;
+use UserBundle\UserRole\UserRoleManager;
 
 /**
  * @property \UserBundle\Entity\User $entity
@@ -15,9 +16,20 @@ use UserBundle\ORM\AbstractEntityModel;
  */
 class User extends AbstractEntityModel implements UserModelInterface
 {
+    protected UserRoleManager $userRoleManager;
+
     public function getId(): int
     {
         return $this->entity->getId();
+    }
+
+    public function getUserRoleManager(): UserRoleManager
+    {
+        if (!isset($this->userRoleManager)) {
+            $this->userRoleManager = new UserRoleManager($this);
+        }
+
+        return $this->userRoleManager;
     }
 
     public function setEmailVerificationCode(string $salt): void
