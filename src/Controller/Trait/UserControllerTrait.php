@@ -91,7 +91,11 @@ trait UserControllerTrait
             $user->setEmailVerified();
         }
 
-        $email = $user->getRegistrationEmail();
+        $template = 'emails/sign-up.html.twig';
+        if (!$twig->getLoader()->exists($template)) {
+            $template = '@UserBundle/emails/sign-up.html.twig';
+        }
+        $email = $user->getRegistrationEmail($template);
         $email->addFrom($this->fromEmail);
         $email->addReplyTo($this->fromEmail);
         $mailer->send($email);
@@ -228,7 +232,11 @@ trait UserControllerTrait
                 $salt = $request->server->get('APP_SECRET');
                 $user->setForgotPasswordCode($salt);
 
-                $email = $user->getForgotPasswordEmail();
+                $template = 'emails/forgot-password.html.twig';
+                if (!$twig->getLoader()->exists($template)) {
+                    $template = '@UserBundle/emails/forgot-password.html.twig';
+                }
+                $email = $user->getForgotPasswordEmail($template);
                 $email->addFrom($this->fromEmail);
                 $email->addReplyTo($this->fromEmail);
                 $mailer->send($email);
