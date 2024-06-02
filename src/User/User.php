@@ -15,8 +15,6 @@ use UserBundle\ORM\AbstractEntityModel;
  */
 class User extends AbstractEntityModel implements UserModelInterface
 {
-    public const ROLE_ADMIN = 'ROLE_ADMIN';
-
     public function getId(): int
     {
         return $this->entity->getId();
