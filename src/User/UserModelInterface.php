@@ -3,12 +3,15 @@
 namespace UserBundle\User;
 
 use Symfony\Component\Mime\Email;
+use UserBundle\UserRole\UserRoleManager;
 
 interface UserModelInterface
 {
     public function getEntity();
 
     public function getId(): int;
+
+    public function getUserRoleManager(): UserRoleManager;
 
     public function setEmailVerificationCode(string $salt): void;
 
