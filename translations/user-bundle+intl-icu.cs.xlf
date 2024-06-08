@@ -88,7 +88,6 @@
         <source>user.sign_up.success_email_verification</source>
         <target>Účet byl úspěšně vytvořen. Je vyžadováno potvrzení e-mailu, zkontrolujte prosím svůj e-mailový účet.</target>
       </trans-unit>
-
       <trans-unit id="user.verify_email.success_requires_activation">
         <source>user.verify_email.success_requires_activation</source>
         <target>Váš e-mail je potvrzený, účet čeká na schválení administrátorem</target>
@@ -101,7 +100,6 @@
         <source>user.verify_email.invalid_code</source>
         <target>Neplatný aktivační kód</target>
       </trans-unit>
-
       <trans-unit id="user.sign_in.link">
         <source>user.sign_in.link</source>
         <target>Přihlaste se</target>
@@ -112,7 +110,7 @@
       </trans-unit>
       <trans-unit id="user.sign_in.subtitle">
         <source>user.sign_in.subtitle</source>
-        <target>Přihlaste se ke svému účtu pomocí e-mailu a hesla poskytnutého při registraci.</target>
+        <target>Přihlaste se ke svému účtu pomocí e-mailu a&amp;nhsp;hesla zadaného při&amp;nhsp;registraci.</target>
       </trans-unit>
       <trans-unit id="user.sign_in.form.email">
         <source>user.sign_in.form.email</source>
@@ -134,12 +132,10 @@
         <source>user.sign_in.sign_up_intro</source>
         <target>Nemáte účet?</target>
       </trans-unit>
-
       <trans-unit id="user.sign_out.link">
         <source>user.sign_out.link</source>
         <target>Odhlásit se</target>
       </trans-unit>
-
       <trans-unit id="user.forgot_password.link">
         <source>user.forgot_password.link</source>
         <target>Zapomněli jste heslo?</target>
@@ -186,7 +182,7 @@
       </trans-unit>
       <trans-unit id="user.forgot_password.email.button">
         <source>user.forgot_password.email.button</source>
-        <target>Kliknutím sem obnovíte heslo</target>
+        <target>Obnovit heslo</target>
       </trans-unit>
       <trans-unit id="user.new_password.heading">
         <source>user.new_password.heading</source>
@@ -212,12 +208,10 @@
         <source>user.new_password.form.submit</source>
         <target>Obnovit heslo</target>
       </trans-unit>
-
       <trans-unit id="user.dashboard.heading">
         <source>user.dashboard.heading</source>
         <target>Přehled vašeho profilu</target>
       </trans-unit>
-
       <trans-unit id="user.settings.link">
         <source>user.settings.link</source>
         <target>Nastavení profilu</target>
