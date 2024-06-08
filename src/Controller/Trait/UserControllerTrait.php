@@ -26,7 +26,6 @@ use UserBundle\User\UserFactoryInterface;
 trait UserControllerTrait
 {
     protected bool $emailVerificationEnabled = true;
-    protected string $fromEmail = 'noreply@sluzba.cz';
     protected bool $requiresActivation = false;
 
     /**
@@ -41,7 +40,8 @@ trait UserControllerTrait
         UserFactoryInterface        $userFactory,
         UserPasswordHasherInterface $passwordHasher,
         TranslatorInterface         $t
-    ): Response {
+    ): Response
+    {
         if (null !== $this->getUser()) {
             return $this->redirectToRoute('user_dashboard');
         }
@@ -96,8 +96,6 @@ trait UserControllerTrait
             $template = '@UserBundle/emails/sign-up.html.twig';
         }
         $email = $user->getRegistrationEmail($template);
-        $email->addFrom($this->fromEmail);
-        $email->addReplyTo($this->fromEmail);
         $mailer->send($email);
 
         if ($emailVerificationEnabled) {
@@ -122,7 +120,8 @@ trait UserControllerTrait
         Environment          $twig,
         TranslatorInterface  $t,
         UserFactoryInterface $userFactory
-    ): Response {
+    ): Response
+    {
         $template = 'user/verify-email.html.twig';
         if (!$twig->getLoader()->exists($template)) {
             $template = '@UserBundle/user/verify-email.html.twig';
@@ -153,7 +152,8 @@ trait UserControllerTrait
         AuthenticationUtils $authenticationUtils,
         Environment         $twig,
         TranslatorInterface $t
-    ): Response {
+    ): Response
+    {
         $template = 'user/sign-in.html.twig';
         if (!$twig->getLoader()->exists($template)) {
             $template = '@UserBundle/user/sign-in.html.twig';
@@ -187,7 +187,8 @@ trait UserControllerTrait
     #[Route('/user/dashboard', name: 'user_dashboard')]
     public function dashboard(
         Environment $twig
-    ): Response {
+    ): Response
+    {
         // TODO authorization via route check
         if (null === $this->getUser()) {
             return $this->redirectToRoute('user_sign_in');
@@ -213,7 +214,8 @@ trait UserControllerTrait
         Request              $request,
         TranslatorInterface  $t,
         UserFactoryInterface $userFactory
-    ): Response {
+    ): Response
+    {
         if (null !== $this->getUser()) {
             return $this->redirectToRoute('user_dashboard');
         }
@@ -237,8 +239,6 @@ trait UserControllerTrait
                     $template = '@UserBundle/emails/forgot-password.html.twig';
                 }
                 $email = $user->getForgotPasswordEmail($template);
-                $email->addFrom($this->fromEmail);
-                $email->addReplyTo($this->fromEmail);
                 $mailer->send($email);
 
                 $this->addFlash('success', $t->trans('user.forgot_password.success', [], 'user-bundle'));
@@ -260,7 +260,8 @@ trait UserControllerTrait
         TranslatorInterface         $t,
         UserFactoryInterface        $userFactory,
         UserPasswordHasherInterface $passwordHasher
-    ): Response {
+    ): Response
+    {
         if (null !== $this->getUser()) {
             return $this->redirectToRoute('user_dashboard');
         }
