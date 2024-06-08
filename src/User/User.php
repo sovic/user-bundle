@@ -95,6 +95,7 @@ class User extends AbstractEntityModel implements UserModelInterface
                 'expiration_date' => $createDate->modify('+7 days'),
                 'password' => $password,
                 'subject' => $this->translator->trans('user.sign_up.email.subject', [], 'user-bundle'),
+                'recipients' => [$entity->getEmail()],
             ]);
     }
 
@@ -114,6 +115,7 @@ class User extends AbstractEntityModel implements UserModelInterface
             ->context([
                 'forgot_password_code' => $code,
                 'subject' => $this->translator->trans('user.forgot_password.email.subject', [], 'user-bundle'),
+                'recipients' => [$entity->getEmail()],
             ]);
     }
 }
