@@ -110,7 +110,7 @@
       </trans-unit>
       <trans-unit id="user.sign_in.subtitle">
         <source>user.sign_in.subtitle</source>
-        <target>Přihlaste se ke svému účtu pomocí e-mailu a&amp;nhsp;hesla zadaného při&amp;nhsp;registraci.</target>
+        <target>Přihlaste se ke svému účtu pomocí e-mailu a&amp;nbsp;hesla zadaného při&amp;nbsp;registraci.</target>
       </trans-unit>
       <trans-unit id="user.sign_in.form.email">
         <source>user.sign_in.form.email</source>
