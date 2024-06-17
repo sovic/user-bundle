@@ -115,6 +115,7 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
         }
 
         $user->setLastLoginDate(new DateTimeImmutable());
+        $user->setLogins($user->getLogins() + 1);
         $this->entityManager->persist($user);
         $this->entityManager->flush();
 
