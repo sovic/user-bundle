@@ -264,6 +264,38 @@
         <source>user.settings.invalid_new_password</source>
         <target>Nové heslo je neplatné!</target>
       </trans-unit>
+      <trans-unit id="user.edit.form.email">
+        <source>user.edit.form.email</source>
+        <target>E-mail</target>
+      </trans-unit>
+      <trans-unit id="user.edit.form.username">
+        <source>user.edit.form.username</source>
+        <target>Uživatelské jméno</target>
+      </trans-unit>
+      <trans-unit id="user.edit.form.submit">
+        <source>user.edit.form.submit</source>
+        <target>Uložit</target>
+      </trans-unit>
+      <trans-unit id="user.password.form.new_password">
+        <source>user.password.form.new_password</source>
+        <target>Nové heslo</target>
+      </trans-unit>
+      <trans-unit id="user.password.form.submit">
+        <source>user.password.form.submit</source>
+        <target>Uložit</target>
+      </trans-unit>
+      <trans-unit id="user.password.form.success">
+        <source>user.password.form.success</source>
+        <target>Nové heslo nastaveno</target>
+      </trans-unit>
+      <trans-unit id="user.password.form.is_enabled">
+        <source>user.password.form.is_enabled</source>
+        <target>Aktivní</target>
+      </trans-unit>
+      <trans-unit id="user.password.form.is_emailing_enabled">
+        <source>user.password.form.is_emailing_enabled</source>
+        <target>Zasílání notifikačních emailů</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
