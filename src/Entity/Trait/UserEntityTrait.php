@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\GeneratedValue;
 use Doctrine\ORM\Mapping\Id;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints\Length;
 
 
 trait UserEntityTrait
@@ -17,30 +18,41 @@ trait UserEntityTrait
     #[Column(type: "integer")]
     protected int $id;
 
+    #[Length(max: 180)]
     #[Column(type: Types::STRING, length: 180, unique: true, nullable: false)]
     protected string $email;
 
+    #[Length(max: 180)]
     #[Column(type: Types::STRING, length: 180, nullable: true, options: ["default" => null])]
     protected ?string $username = null;
 
+    #[Length(max: 255)]
+    #[Column(type: Types::STRING, length: 255, nullable: true, options: ["default" => null])]
+    protected ?string $displayName = null;
+
+    #[Length(max: 255)]
     #[Column(type: Types::STRING, length: 255)]
     protected string $password;
 
     #[Column(name: "create_date", type: Types::DATETIME_IMMUTABLE, nullable: false)]
     protected DateTimeImmutable $createDate;
 
+    #[Length(max: 32)]
     #[Column(name: "email_verification_code", type: Types::STRING, length: 32, unique: true, nullable: true, options: ["default" => null])]
     protected ?string $emailVerificationCode = null;
 
     #[Column(name: "email_verification_date", type: Types::DATETIME_IMMUTABLE, nullable: true, options: ["default" => null])]
     protected ?DateTimeImmutable $emailVerificationDate = null;
 
+    #[Length(max: 2)]
     #[Column(name: "country_code", type: Types::STRING, length: 2, nullable: true, options: ["default" => null])]
     protected ?string $countryCode = null;
 
+    #[Length(max: 3)]
     #[Column(name: "default_currency", type: Types::STRING, length: 3, nullable: true, options: ["default" => null])]
     protected ?string $defaultCurrency = null;
 
+    #[Length(max: 10)]
     #[Column(name: "locale", type: Types::STRING, length: 10, nullable: true, options: ["default" => null])]
     protected ?string $locale = null;
 
@@ -56,6 +68,7 @@ trait UserEntityTrait
     #[Column(name: "logins", type: Types::INTEGER, nullable: false, options: ["default" => 0])]
     protected int $logins = 0;
 
+    #[Length(max: 32)]
     #[Column(name: "forgot_password_code", type: Types::STRING, length: 32, unique: true, nullable: true, options: ["default" => null])]
     protected ?string $forgotPasswordCode = null;
 
@@ -256,5 +269,15 @@ trait UserEntityTrait
     public function setDefaultCurrency(?string $defaultCurrency): void
     {
         $this->defaultCurrency = $defaultCurrency;
+    }
+
+    public function getDisplayName(): ?string
+    {
+        return $this->displayName;
+    }
+
+    public function setDisplayName(?string $displayName): void
+    {
+        $this->displayName = $displayName;
     }
 }
