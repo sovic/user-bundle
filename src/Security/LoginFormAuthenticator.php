@@ -2,6 +2,7 @@
 
 namespace UserBundle\Security;
 
+use Doctrine\ORM\EntityRepository;
 use UserBundle\Entity\User;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
@@ -32,7 +33,8 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
 
     public const LOGIN_ROUTE = 'user_sign_in';
 
-    private UserRepository $userRepository;
+    /** @var UserRepository $repo */
+    private EntityRepository $userRepository;
 
     public function __construct(
         private readonly CsrfTokenManagerInterface   $csrfTokenManager,
