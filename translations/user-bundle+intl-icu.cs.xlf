@@ -276,6 +276,14 @@
         <source>user.edit.form.username</source>
         <target>Uživatelské jméno</target>
       </trans-unit>
+      <trans-unit id="user.edit.form.is_enabled">
+        <source>user.edit.form.is_enabled</source>
+        <target>Aktivní</target>
+      </trans-unit>
+      <trans-unit id="user.edit.form.is_emailing_enabled">
+        <source>user.edit.form.is_emailing_enabled</source>
+        <target>Zasílání notifikačních emailů</target>
+      </trans-unit>
       <trans-unit id="user.edit.form.submit">
         <source>user.edit.form.submit</source>
         <target>Uložit</target>
@@ -299,6 +307,10 @@
       <trans-unit id="user.password.form.is_emailing_enabled">
         <source>user.password.form.is_emailing_enabled</source>
         <target>Zasílání notifikačních emailů</target>
+      </trans-unit>
+      <trans-unit id="user.password.form.send_email">
+        <source>user.password.form.send_email</source>
+        <target>Poslat emailem</target>
       </trans-unit>
       <trans-unit id="user.new_password.email.subject">
         <source>user.new_password.email.subject</source>
