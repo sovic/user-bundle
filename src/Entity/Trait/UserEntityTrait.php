@@ -280,4 +280,28 @@ trait UserEntityTrait
     {
         $this->displayName = $displayName;
     }
+
+    public function formData(): array
+    {
+        return [
+            'display_name' => $this->getDisplayName(),
+            'is_emailing_enabled' => $this->isEmailingEnabled(),
+            'username' => $this->getUsername(),
+        ];
+    }
+
+    public function adminFormData(): array
+    {
+        return [
+            'id' => $this->getId(),
+            'create_date' => $this->getCreateDate(),
+            'display_name' => $this->getDisplayName(),
+            'email' => $this->getEmail(),
+            'email_verification_date' => $this->getEmailVerificationDate(),
+            'is_emailing_enabled' => $this->isEmailingEnabled(),
+            'is_enabled' => $this->isEnabled(),
+            'last_login_date' => $this->getLastLoginDate(),
+            'username' => $this->getUsername(),
+        ];
+    }
 }

@@ -35,12 +35,12 @@ class UserSettings extends AbstractType
                 ]
             )
             ->add(
-                'full_name',
+                'display_name',
                 TextType::class,
                 [
-                    'label' => 'user.settings.form.full_name',
+                    'label' => 'user.settings.form.display_name',
                     'attr' => [
-                        'placeholder' => 'user.settings.form.full_name',
+                        'placeholder' => 'user.settings.form.display_name',
                     ],
                     'required' => false,
                 ]
