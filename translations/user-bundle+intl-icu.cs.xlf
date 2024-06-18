@@ -296,6 +296,18 @@
         <source>user.password.form.is_emailing_enabled</source>
         <target>Zasílání notifikačních emailů</target>
       </trans-unit>
+      <trans-unit id="user.new_password.email.subject">
+        <source>user.new_password.email.subject</source>
+        <target>Nový email pro váš účet</target>
+      </trans-unit>
+      <trans-unit id="user.new_password.email.heading">
+        <source>user.new_password.email.heading</source>
+        <target>Nastavili jsme Vám nové heslo</target>
+      </trans-unit>
+      <trans-unit id="user.new_password.email.text">
+        <source>user.new_password.email.text</source>
+        <target>Vaše nové heslo: &lt;strong&gt;{password}&lt;/strong&gt;</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

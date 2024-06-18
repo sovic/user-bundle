@@ -118,4 +118,21 @@ class User extends AbstractEntityModel implements UserModelInterface
                 'recipients' => [$entity->getEmail()],
             ]);
     }
+
+    public function getNewPasswordEmail(
+        string $password,
+        string $template = '@UserBundle/emails/new-password.html.twig',
+    ): Email {
+        $entity = $this->entity;
+
+        return (new TemplatedEmail())
+            ->addTo($entity->getEmail())
+            ->htmlTemplate($template)
+            ->subject($this->translator->trans('user.new_password.email.subject', [], 'user-bundle'))
+            ->context([
+                'password' => $password,
+                'subject' => $this->translator->trans('user.new_password.email.subject', [], 'user-bundle'),
+                'recipients' => [$entity->getEmail()],
+            ]);
+    }
 }
