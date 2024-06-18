@@ -5,6 +5,9 @@ namespace UserBundle\User;
 use Symfony\Component\Mime\Email;
 use UserBundle\UserRole\UserRoleManager;
 
+/**
+ * @property $entity
+ */
 interface UserModelInterface
 {
     public function getEntity();
