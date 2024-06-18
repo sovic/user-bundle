@@ -30,6 +30,7 @@ trait SettingsControllerTrait
         $userSettingsForm = $this->createForm(UserSettings::class);
         if (empty($userSettingsForm->getData())) {
             $userSettingsForm->setData([
+                'full_name' => $user->entity->getDisplayName(),
                 'is_emailing_enabled' => $user->entity->isEmailingEnabled(),
                 'username' => $user->entity->getUsername(),
             ]);
@@ -38,11 +39,12 @@ trait SettingsControllerTrait
         $userSettingsForm->handleRequest($request);
         if ($userSettingsForm->isSubmitted() && $userSettingsForm->isValid()) {
             $data = $userSettingsForm->getData();
+            $user->entity->setDisplayName($data['full_name']);
+            $user->entity->setIsEmailingEnabled((bool) $data['is_emailing_enabled']);
             $username = $data['username'];
             if (!empty($username) && $username !== $user->entity->getUsername()) {
                 $user->entity->setUsername($username);
             }
-            $user->entity->setIsEmailingEnabled((bool) $data['is_emailing_enabled']);
             $user->flush();
             $this->addFlash('success', $t->trans('user.settings.success', [], 'user-bundle'));
 
