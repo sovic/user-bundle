@@ -232,6 +232,10 @@
         <source>user.settings.form.username</source>
         <target>Uživatelské jméno</target>
       </trans-unit>
+      <trans-unit id="user.settings.form.full_name">
+        <source>user.settings.form.full_name</source>
+        <target>Celé jméno</target>
+      </trans-unit>
       <trans-unit id="user.settings.form.is_emailing_enabled">
         <source>user.settings.form.is_emailing_enabled</source>
         <target>Zasílání notifikačních e-mailů zapnuto/vypnuto</target>

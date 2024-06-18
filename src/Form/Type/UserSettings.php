@@ -35,6 +35,17 @@ class UserSettings extends AbstractType
                 ]
             )
             ->add(
+                'full_name',
+                TextType::class,
+                [
+                    'label' => 'user.settings.form.full_name',
+                    'attr' => [
+                        'placeholder' => 'user.settings.form.full_name',
+                    ],
+                    'required' => false,
+                ]
+            )
+            ->add(
                 'is_emailing_enabled',
                 CheckboxType::class,
                 [
