@@ -88,7 +88,6 @@
         <source>user.sign_up.success_email_verification</source>
         <target>Účet byl úspěšně vytvořen. Je vyžadováno potvrzení e-mailu, zkontrolujte prosím svůj e-mailový účet.</target>
       </trans-unit>
-
       <trans-unit id="user.verify_email.success_requires_activation">
         <source>user.verify_email.success_requires_activation</source>
         <target>Váš e-mail je potvrzený, účet čeká na schválení administrátorem</target>
@@ -101,7 +100,6 @@
         <source>user.verify_email.invalid_code</source>
         <target>Neplatný aktivační kód</target>
       </trans-unit>
-
       <trans-unit id="user.sign_in.link">
         <source>user.sign_in.link</source>
         <target>Přihlaste se</target>
@@ -134,12 +132,10 @@
         <source>user.sign_in.sign_up_intro</source>
         <target>Nemáte účet?</target>
       </trans-unit>
-
       <trans-unit id="user.sign_out.link">
         <source>user.sign_out.link</source>
         <target>Odhlásit se</target>
       </trans-unit>
-
       <trans-unit id="user.forgot_password.link">
         <source>user.forgot_password.link</source>
         <target>Zapomněli jste heslo?</target>
@@ -212,12 +208,10 @@
         <source>user.new_password.form.submit</source>
         <target>Obnovit heslo</target>
       </trans-unit>
-
       <trans-unit id="user.dashboard.heading">
         <source>user.dashboard.heading</source>
         <target>Přehled vašeho profilu</target>
       </trans-unit>
-
       <trans-unit id="user.settings.link">
         <source>user.settings.link</source>
         <target>Nastavení profilu</target>
@@ -237,6 +231,10 @@
       <trans-unit id="user.settings.form.username">
         <source>user.settings.form.username</source>
         <target>Uživatelské jméno</target>
+      </trans-unit>
+      <trans-unit id="user.settings.form.display_name">
+        <source>user.settings.form.display_name</source>
+        <target>Celé jméno</target>
       </trans-unit>
       <trans-unit id="user.settings.form.is_emailing_enabled">
         <source>user.settings.form.is_emailing_enabled</source>
@@ -269,6 +267,62 @@
       <trans-unit id="user.settings.invalid_new_password">
         <source>user.settings.invalid_new_password</source>
         <target>Nové heslo je neplatné!</target>
+      </trans-unit>
+      <trans-unit id="user.edit.form.email">
+        <source>user.edit.form.email</source>
+        <target>E-mail</target>
+      </trans-unit>
+      <trans-unit id="user.edit.form.username">
+        <source>user.edit.form.username</source>
+        <target>Používateľské meno</target>
+      </trans-unit>
+      <trans-unit id="user.edit.form.is_enabled">
+        <source>user.edit.form.is_enabled</source>
+        <target>Aktívny</target>
+      </trans-unit>
+      <trans-unit id="user.edit.form.is_emailing_enabled">
+        <source>user.edit.form.is_emailing_enabled</source>
+        <target>Odosielanie notifikačných e-mailov</target>
+      </trans-unit>
+      <trans-unit id="user.edit.form.submit">
+        <source>user.edit.form.submit</source>
+        <target>Uložiť</target>
+      </trans-unit>
+      <trans-unit id="user.password.form.new_password">
+        <source>user.password.form.new_password</source>
+        <target>Nové heslo</target>
+      </trans-unit>
+      <trans-unit id="user.password.form.submit">
+        <source>user.password.form.submit</source>
+        <target>Uložiť</target>
+      </trans-unit>
+      <trans-unit id="user.password.form.success">
+        <source>user.password.form.success</source>
+        <target>Nastavené nové heslo</target>
+      </trans-unit>
+      <trans-unit id="user.password.form.is_enabled">
+        <source>user.password.form.is_enabled</source>
+        <target>Aktívny</target>
+      </trans-unit>
+      <trans-unit id="user.password.form.is_emailing_enabled">
+        <source>user.password.form.is_emailing_enabled</source>
+        <target>Odosielanie notifikačných e-mailov</target>
+      </trans-unit>
+      <trans-unit id="user.password.form.send_email">
+        <source>user.password.form.send_email</source>
+        <target>Poslať emailem</target>
+      </trans-unit>
+      <trans-unit id="user.new_password.email.subject">
+        <source>user.new_password.email.subject</source>
+        <target>Nový e-mail pre váš účet</target>
+      </trans-unit>
+      <trans-unit id="user.new_password.email.heading">
+        <source>user.new_password.email.heading</source>
+        <target>Nastavili sme pre vás nové heslo</target>
+      </trans-unit>
+      <trans-unit id="user.new_password.email.text">
+        <source>user.new_password.email.text</source>
+        <target>Vaše nové heslo: &lt;strong&gt;{password}&lt;/strong&gt;</target>
       </trans-unit>
     </body>
   </file>
