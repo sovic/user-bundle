@@ -4,11 +4,12 @@ namespace UserBundle\Entity\Trait;
 
 use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\ManyToOne;
+use UserBundle\Entity\User;
 use UserBundle\User\UserEntityInterface;
 
 trait CreatorTrait
 {
-    #[ManyToOne(targetEntity: UserEntityInterface::class)]
+    #[ManyToOne(targetEntity: User::class)]
     #[JoinColumn(name: 'creator_user_id', referencedColumnName: 'id', nullable: true, onDelete: 'RESTRICT')]
     public ?UserEntityInterface $creator = null;
 
