@@ -10,7 +10,7 @@ use UserBundle\User\UserEntityInterface;
 trait CreatorTrait
 {
     #[ManyToOne(targetEntity: User::class)]
-    #[JoinColumn(name: 'creator_user_id', referencedColumnName: 'id', nullable: true, onDelete: 'RESTRICT')]
+    #[JoinColumn(name: 'creator_user_id', referencedColumnName: 'id', nullable: true, onDelete: 'SET NULL')]
     public ?UserEntityInterface $creator = null;
 
     public function getCreator(): ?UserEntityInterface

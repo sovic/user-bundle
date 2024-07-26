@@ -16,7 +16,7 @@ use UserBundle\Entity\Trait\CreatorTrait;
 use UserBundle\User\UserEntityInterface;
 
 if (!defined('GLOBAL_ENTITY_ID_STRATEGY')) {
-    define('GLOBAL_ENTITY_ID_STRATEGY', 'auto');
+    define('GLOBAL_ENTITY_ID_STRATEGY', 'AUTO');
 }
 
 #[MappedSuperclass]
