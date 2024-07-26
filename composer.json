@@ -17,11 +17,19 @@
             "name": "Vojtech Bojda"
         }
     ],
-    "minimum-stability": "stable",
+    "repositories": [
+        {
+            "type": "git",
+            "url": "https://github.com/sovic/common.git"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "require": {
         "php": "~8.2",
         "doctrine/orm": "^2.19",
         "doctrine/dbal": "^3.8",
+        "sovic/common": "dev-master",
         "symfony/cache": "^7.0",
         "symfony/form": "^7.0",
         "symfony/framework-bundle": "^7.0",
