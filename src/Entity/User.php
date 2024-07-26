@@ -15,6 +15,10 @@ use Symfony\Component\Validator\Constraints\Length;
 use UserBundle\Entity\Trait\CreatorTrait;
 use UserBundle\User\UserEntityInterface;
 
+if (!defined('GLOBAL_ENTITY_ID_STRATEGY')) {
+    define('GLOBAL_ENTITY_ID_STRATEGY', 'auto');
+}
+
 #[MappedSuperclass]
 class User implements UserInterface, UserEntityInterface, PasswordAuthenticatedUserInterface
 {
@@ -22,7 +26,7 @@ class User implements UserInterface, UserEntityInterface, PasswordAuthenticatedU
     use CreatorTrait;
 
     #[Id]
-    #[GeneratedValue]
+    #[GeneratedValue(strategy: GLOBAL_ENTITY_ID_STRATEGY)]
     #[Column(type: "integer")]
     protected int $id;
 
