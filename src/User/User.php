@@ -84,7 +84,7 @@ class User extends AbstractEntityModel implements UserModelInterface
             throw new LogicException('Email verification code is not set');
         }
 
-        $createDate = DateTime::createFromImmutable($entity->getCreateDate());
+        $createdAt = DateTime::createFromImmutable($entity->getCreatedAt());
 
         return (new TemplatedEmail())
             ->addTo($entity->getEmail())
@@ -92,7 +92,7 @@ class User extends AbstractEntityModel implements UserModelInterface
             ->subject($this->translator->trans('user.sign_up.email.subject', [], 'user-bundle'))
             ->context([
                 'email_verification_code' => !$entity->getEmailVerificationDate() ? $verificationCode : null,
-                'expiration_date' => $createDate->modify('+7 days'),
+                'expiration_date' => $createdAt->modify('+7 days'),
                 'password' => $password,
                 'subject' => $this->translator->trans('user.sign_up.email.subject', [], 'user-bundle'),
                 'recipients' => [$entity->getEmail()],

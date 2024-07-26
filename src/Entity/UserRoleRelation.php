@@ -7,7 +7,8 @@ use Doctrine\ORM\Mapping\Index;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\ManyToOne;
 use Doctrine\ORM\Mapping\MappedSuperclass;
-use UserBundle\Entity\Trait\CreatedAtTrait;
+use Sovic\Common\Entity\Trait\CreatedAtTrait;
+use UserBundle\Entity\Trait\CreatorTrait;
 use UserBundle\User\UserEntityInterface;
 use UserBundle\UserRole\UserRoleEntityInterface;
 
@@ -17,6 +18,7 @@ use UserBundle\UserRole\UserRoleEntityInterface;
 class UserRoleRelation
 {
     use CreatedAtTrait;
+    use CreatorTrait;
 
     #[Id]
     #[ManyToOne(targetEntity: User::class)]

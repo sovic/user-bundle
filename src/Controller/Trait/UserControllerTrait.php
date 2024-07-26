@@ -40,8 +40,7 @@ trait UserControllerTrait
         UserFactoryInterface        $userFactory,
         UserPasswordHasherInterface $passwordHasher,
         TranslatorInterface         $t
-    ): Response
-    {
+    ): Response {
         if (null !== $this->getUser()) {
             return $this->redirectToRoute('user_dashboard');
         }
@@ -76,7 +75,7 @@ trait UserControllerTrait
 
         $user = new User();
         $user->setEmail($email);
-        $user->setCreateDate(new DateTimeImmutable());
+        $user->setCreatedAt(new DateTimeImmutable());
         $user->setPassword($passwordHasher->hashPassword($user, $data['password']));
         $em->persist($user);
         $em->flush();
@@ -120,8 +119,7 @@ trait UserControllerTrait
         Environment          $twig,
         TranslatorInterface  $t,
         UserFactoryInterface $userFactory
-    ): Response
-    {
+    ): Response {
         $template = 'user/verify-email.html.twig';
         if (!$twig->getLoader()->exists($template)) {
             $template = '@UserBundle/user/verify-email.html.twig';
@@ -152,8 +150,7 @@ trait UserControllerTrait
         AuthenticationUtils $authenticationUtils,
         Environment         $twig,
         TranslatorInterface $t
-    ): Response
-    {
+    ): Response {
         $template = 'user/sign-in.html.twig';
         if (!$twig->getLoader()->exists($template)) {
             $template = '@UserBundle/user/sign-in.html.twig';
@@ -187,8 +184,7 @@ trait UserControllerTrait
     #[Route('/user/dashboard', name: 'user_dashboard')]
     public function dashboard(
         Environment $twig
-    ): Response
-    {
+    ): Response {
         // TODO authorization via route check
         if (null === $this->getUser()) {
             return $this->redirectToRoute('user_sign_in');
@@ -214,8 +210,7 @@ trait UserControllerTrait
         Request              $request,
         TranslatorInterface  $t,
         UserFactoryInterface $userFactory
-    ): Response
-    {
+    ): Response {
         if (null !== $this->getUser()) {
             return $this->redirectToRoute('user_dashboard');
         }
@@ -260,8 +255,7 @@ trait UserControllerTrait
         TranslatorInterface         $t,
         UserFactoryInterface        $userFactory,
         UserPasswordHasherInterface $passwordHasher
-    ): Response
-    {
+    ): Response {
         if (null !== $this->getUser()) {
             return $this->redirectToRoute('user_dashboard');
         }

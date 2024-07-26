@@ -79,9 +79,9 @@ class UserFactory extends EntityModelFactory implements UserFactoryInterface
         if (null === $user) {
             return null;
         }
-        $createdDate = DateTime::createFromImmutable($user->entity->getCreateDate());
+        $createdAt = DateTime::createFromImmutable($user->entity->getCreatedAt());
         $now = new DateTime();
-        if ($now > $createdDate->modify('+7 days')) {
+        if ($now > $createdAt->modify('+7 days')) {
             return null;
         }
 
@@ -133,7 +133,7 @@ class UserFactory extends EntityModelFactory implements UserFactoryInterface
     {
         $user = new UserEntity();
         $user->setEmail($email);
-        $user->setCreateDate(new DateTimeImmutable());
+        $user->setCreatedAt(new DateTimeImmutable());
         $user->setPassword($this->passwordHasher->hashPassword($user, $password));
 
         return $this->loadEntityModel($user, $this->modelClass);
