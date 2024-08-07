@@ -310,7 +310,7 @@
       </trans-unit>
       <trans-unit id="user.password.form.send_email">
         <source>user.password.form.send_email</source>
-        <target>Poslat emailem</target>
+        <target>Poslat email s odkazem pro nastavení hesla</target>
       </trans-unit>
       <trans-unit id="user.new_password.email.subject">
         <source>user.new_password.email.subject</source>

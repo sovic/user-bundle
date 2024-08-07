@@ -306,7 +306,7 @@
       </trans-unit>
       <trans-unit id="user.password.form.send_email">
         <source>user.password.form.send_email</source>
-        <target>Poslať emailem</target>
+        <target>Poslať email s odkazom pre nastavenie hesla</target>
       </trans-unit>
       <trans-unit id="user.new_password.email.subject">
         <source>user.new_password.email.subject</source>

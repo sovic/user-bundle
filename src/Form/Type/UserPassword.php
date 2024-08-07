@@ -22,36 +22,38 @@ class UserPassword extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->setMethod('POST');
-        $builder
-            ->add(
-                'new_password',
-                PasswordType::class,
-                [
-                    'label' => 'user.password.form.new_password',
-                    'attr' => [
-                        'placeholder' => 'user.password.form.new_password',
-                        'autocomplete' => 'false',
-                    ],
-                    'required' => true,
-                ]
-            )
-            ->add(
-                'send_email',
-                CheckboxType::class,
-                [
-                    'label' => 'user.password.form.send_email',
-                    'required' => false,
-                ]
-            )
-            ->add(
-                'save',
-                SubmitType::class,
-                [
-                    'label' => 'user.password.form.submit',
-                    'attr' => [
-                        'class' => FormSettings::SUBMIT_CLASS,
-                    ],
-                ]
-            );
+
+        $builder->add(
+            'new_password',
+            PasswordType::class,
+            [
+                'label' => 'user.password.form.new_password',
+                'attr' => [
+                    'placeholder' => 'user.password.form.new_password',
+                    'autocomplete' => 'new-password',
+                ],
+                'required' => true,
+            ]
+        );
+
+        $builder->add(
+            'send_email',
+            CheckboxType::class,
+            [
+                'label' => 'user.password.form.send_email',
+                'required' => false,
+            ]
+        );
+
+        $builder->add(
+            'save',
+            SubmitType::class,
+            [
+                'label' => 'user.password.form.submit',
+                'attr' => [
+                    'class' => FormSettings::SUBMIT_CLASS,
+                ],
+            ]
+        );
     }
 }
