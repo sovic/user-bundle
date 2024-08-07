@@ -7,6 +7,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\GeneratedValue;
 use Doctrine\ORM\Mapping\Id;
+use Doctrine\ORM\Mapping\MappedSuperclass;
 use Sovic\Common\Entity\Trait\CreatedAtTrait;
 use Sovic\Common\Entity\Trait\DeletedAtTrait;
 use Sovic\Common\Enum\CountryId;
@@ -20,6 +21,7 @@ if (!defined('GLOBAL_ENTITY_ID_STRATEGY')) {
     define('GLOBAL_ENTITY_ID_STRATEGY', 'AUTO');
 }
 
+#[MappedSuperclass]
 class User implements UserInterface, UserEntityInterface, PasswordAuthenticatedUserInterface
 {
     use CreatedAtTrait;
