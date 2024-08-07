@@ -22,51 +22,53 @@ class UserSettingsNewPassword extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->setMethod('POST');
-        $builder
-            ->add(
-                'password',
-                PasswordType::class,
-                [
-                    'label' => 'user.settings.new_password.form.old_password',
+
+        $builder->add(
+            'password',
+            PasswordType::class,
+            [
+                'label' => 'user.settings.new_password.form.old_password',
+                'attr' => [
+                    'placeholder' => 'user.settings.new_password.form.old_password',
+                    'autocomplete' => 'new-password',
+                ],
+                'required' => true,
+            ]
+        );
+
+        $builder->add(
+            'new_password',
+            RepeatedType::class,
+            [
+                'type' => PasswordType::class,
+                'required' => true,
+                'first_options' => [
+                    'label' => 'user.settings.new_password.form.new_password',
                     'attr' => [
-                        'placeholder' => 'user.settings.new_password.form.old_password',
-                        'autocomplete' => 'off',
+                        'placeholder' => 'user.settings.new_password.form.new_password',
+                        'autocomplete' => 'new-password',
                     ],
                     'required' => true,
-                ]
-            )
-            ->add(
-                'new_password',
-                RepeatedType::class,
-                [
-                    'type' => PasswordType::class,
-                    'required' => true,
-                    'first_options' => [
-                        'label' => 'user.settings.new_password.form.new_password',
-                        'attr' => [
-                            'placeholder' => 'user.settings.new_password.form.new_password',
-                            'autocomplete' => 'new-password',
-                        ],
-                        'required' => true,
-                    ],
-                    'second_options' => [
-                        'label' => 'user.settings.new_password.form.new_password_check',
-                        'attr' => [
-                            'placeholder' => 'user.settings.new_password.form.new_password_check',
-                        ],
-                        'required' => true,
-                    ],
-                ]
-            )
-            ->add(
-                'save',
-                SubmitType::class,
-                [
-                    'label' => 'user.settings.new_password.form.submit',
+                ],
+                'second_options' => [
+                    'label' => 'user.settings.new_password.form.new_password_check',
                     'attr' => [
-                        'class' => FormSettings::SUBMIT_CLASS,
+                        'placeholder' => 'user.settings.new_password.form.new_password_check',
                     ],
-                ]
-            );
+                    'required' => true,
+                ],
+            ]
+        );
+
+        $builder->add(
+            'save',
+            SubmitType::class,
+            [
+                'label' => 'user.settings.new_password.form.submit',
+                'attr' => [
+                    'class' => FormSettings::SUBMIT_CLASS,
+                ],
+            ]
+        );
     }
 }
