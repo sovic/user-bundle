@@ -135,4 +135,10 @@ class User extends AbstractEntityModel implements UserModelInterface
                 'recipients' => [$entity->getEmail()],
             ]);
     }
+
+    public function delete(): void
+    {
+        $this->entity->setDeletedAt(new DateTimeImmutable());
+        $this->flush();
+    }
 }
