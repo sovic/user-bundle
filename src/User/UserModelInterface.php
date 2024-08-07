@@ -6,7 +6,7 @@ use Symfony\Component\Mime\Email;
 use UserBundle\UserRole\UserRoleManager;
 
 /**
- * @property $entity
+ * @property UserEntityInterface|\UserBundle\Entity\User $entity
  */
 interface UserModelInterface
 {

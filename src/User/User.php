@@ -52,6 +52,11 @@ class User extends AbstractEntityModel implements UserModelInterface
         $this->flush();
     }
 
+    public function isEmailVerified(): bool
+    {
+        return $this->entity->getEmailVerificationDate() !== null;
+    }
+
     public function setEnabled(bool $enabled): void
     {
         $this->entity->setIsEnabled($enabled);
