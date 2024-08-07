@@ -5,9 +5,9 @@ namespace UserBundle\User;
 use DateTime;
 use DateTimeImmutable;
 use LogicException;
+use Sovic\Common\Model\AbstractEntityModel;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Mime\Email;
-use UserBundle\ORM\AbstractEntityModel;
 use UserBundle\UserRole\UserRoleManager;
 
 /**

@@ -3,6 +3,7 @@
 namespace UserBundle\ORM;
 
 use Doctrine\ORM\EntityManagerInterface;
+use Sovic\Common\Model\AbstractEntityModel;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
