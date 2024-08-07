@@ -2,15 +2,14 @@
 
 namespace UserBundle\User;
 
+use Sovic\Common\Model\EntityModelFactory;
 use UserBundle\Entity\User as UserEntity;
-use UserBundle\ORM\EntityModelFactory;
 use DateTime;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use RuntimeException;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
-use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -36,10 +35,9 @@ class UserFactory extends EntityModelFactory implements UserFactoryInterface
         EntityManagerInterface      $entityManager,
         MailerInterface             $mailer,
         TranslatorInterface         $translator,
-        RouterInterface             $router,
         UserPasswordHasherInterface $passwordHasher
     ) {
-        parent::__construct($entityManager, $router, $translator);
+        parent::__construct($entityManager, $translator);
         $this->mailer = $mailer;
         $this->passwordHasher = $passwordHasher;
     }
