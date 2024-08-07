@@ -20,6 +20,8 @@ interface UserModelInterface
 
     public function setEmailVerified(): void;
 
+    public function isEmailVerified(): bool;
+
     public function setEnabled(bool $enabled): void;
 
     public function activate(): void;
