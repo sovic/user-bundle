@@ -32,7 +32,7 @@ class UserPassword extends AbstractType
                     'placeholder' => 'user.password.form.new_password',
                     'autocomplete' => 'new-password',
                 ],
-                'required' => true,
+                'required' => false,
             ]
         );
 
