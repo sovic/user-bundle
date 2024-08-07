@@ -8,7 +8,9 @@ use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\GeneratedValue;
 use Doctrine\ORM\Mapping\Id;
 use Doctrine\ORM\Mapping\MappedSuperclass;
+use Sovic\Common\Entity\Enum\CountryId;
 use Sovic\Common\Entity\Trait\CreatedAtTrait;
+use Sovic\Common\Entity\Trait\DeletedAtTrait;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints\Length;
@@ -24,6 +26,7 @@ class User implements UserInterface, UserEntityInterface, PasswordAuthenticatedU
 {
     use CreatedAtTrait;
     use CreatorTrait;
+    use DeletedAtTrait;
 
     #[Id]
     #[GeneratedValue(strategy: GLOBAL_ENTITY_ID_STRATEGY)]
@@ -54,8 +57,8 @@ class User implements UserInterface, UserEntityInterface, PasswordAuthenticatedU
     protected ?DateTimeImmutable $emailVerificationDate = null;
 
     #[Length(max: 2)]
-    #[Column(name: "country_code", type: Types::STRING, length: 2, nullable: true, options: ["default" => null])]
-    protected ?string $countryCode = null;
+    #[Column(name: "country_code", type: Types::STRING, length: 2, nullable: true, enumType: CountryId::class, options: ["default" => null])]
+    protected ?CountryId $countryCode = null;
 
     #[Length(max: 3)]
     #[Column(name: "default_currency", type: Types::STRING, length: 3, nullable: true, options: ["default" => null])]
@@ -185,12 +188,12 @@ class User implements UserInterface, UserEntityInterface, PasswordAuthenticatedU
         $this->emailVerificationDate = $emailVerificationDate;
     }
 
-    public function getCountryCode(): ?string
+    public function getCountryCode(): ?CountryId
     {
         return $this->countryCode;
     }
 
-    public function setCountryCode(?string $countryCode): void
+    public function setCountryCode(?CountryId $countryCode): void
     {
         $this->countryCode = $countryCode;
     }
