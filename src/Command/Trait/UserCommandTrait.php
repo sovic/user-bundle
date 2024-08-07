@@ -3,12 +3,12 @@
 namespace UserBundle\Command\Trait;
 
 use InvalidArgumentException;
+use Sovic\Common\Validation\EmailValidator;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\Question;
 use UserBundle\User\User;
 use UserBundle\User\UserFactoryInterface;
-use UserBundle\Validation\EmailValidator;
 
 trait UserCommandTrait
 {
