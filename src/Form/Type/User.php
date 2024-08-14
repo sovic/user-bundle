@@ -57,6 +57,18 @@ class User extends AbstractType
         );
 
         $builder->add(
+            'display_name',
+            TextType::class,
+            [
+                'label' => 'user.edit.form.display_name',
+                'attr' => [
+                    'placeholder' => 'user.edit.form.display_name',
+                ],
+                'required' => false,
+            ]
+        );
+
+        $builder->add(
             'is_emailing_enabled',
             CheckboxType::class,
             [

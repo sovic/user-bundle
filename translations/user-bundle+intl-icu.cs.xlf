@@ -336,6 +336,10 @@
         <source>user.api_token.form.expiration_date</source>
         <target>Datum expirace</target>
       </trans-unit>
+      <trans-unit id="user.edit.form.display_name">
+        <source>user.edit.form.display_name</source>
+        <target>Zobrazované jméno</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
