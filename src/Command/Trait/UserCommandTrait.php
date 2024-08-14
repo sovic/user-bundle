@@ -3,7 +3,7 @@
 namespace UserBundle\Command\Trait;
 
 use InvalidArgumentException;
-use Sovic\Common\Validation\EmailValidator;
+use Sovic\Common\Validator\EmailValidator;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\Question;
