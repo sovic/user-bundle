@@ -8,6 +8,7 @@ use LogicException;
 use Sovic\Common\Model\AbstractEntityModel;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Mime\Email;
+use UserBundle\Entity\UserApiToken;
 use UserBundle\UserRole\UserRoleManager;
 
 /**
@@ -146,4 +147,19 @@ class User extends AbstractEntityModel implements UserModelInterface
         $this->entity->setDeletedAt(new DateTimeImmutable());
         $this->flush();
     }
+
+    // api access tokens
+    public function getApiToken(): ?UserApiToken
+    {
+        return $this->getEntityManager()->find(UserApiToken::class, $this->getId());
+    }
+
+    public function createDefaultApiToken(): UserApiToken
+    {
+        $token = new UserApiToken();
+        $token->setUser($this->entity);
+
+        return $token;
+    }
+    //
 }

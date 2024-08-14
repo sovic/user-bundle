@@ -324,6 +324,18 @@
         <source>user.new_password.email.text</source>
         <target>Vaše nové heslo: &lt;strong&gt;{password}&lt;/strong&gt;</target>
       </trans-unit>
+      <trans-unit id="user.api_token.form.submit">
+        <source>user.api_token.form.submit</source>
+        <target>Generovat API token, pokud už token existuje, starý zneplatní a vygeneruje nový!</target>
+      </trans-unit>
+      <trans-unit id="user.api_token.form.token">
+        <source>user.api_token.form.token</source>
+        <target>Token</target>
+      </trans-unit>
+      <trans-unit id="user.api_token.form.expiration_date">
+        <source>user.api_token.form.expiration_date</source>
+        <target>Datum expirace</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
