@@ -266,15 +266,10 @@ trait UserControllerTrait
         }
 
         $user = $userFactory->loadByForgotPasswordCode($code);
-        if (null === $user) {
-            $this->assign('form_error', $t->trans('user.forgot_password.invalid_code', [], 'user-bundle'));
-
-            return $this->render($template);
-        }
 
         $form = $this->createForm(NewPassword::class);
         $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($user && $form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
             $user->entity->setPassword($passwordHasher->hashPassword($user->entity, $data['password']));
             $user->entity->setForgotPasswordCode(null);
@@ -286,6 +281,11 @@ trait UserControllerTrait
         }
 
         $this->assign('new_password_form', $form->createView());
+        if (null === $user) {
+            $this->assign('form_error', $t->trans('user.forgot_password.invalid_code', [], 'user-bundle'));
+
+            return $this->render($template);
+        }
 
         return $this->render($template);
     }
