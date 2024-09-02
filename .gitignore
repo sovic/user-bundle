@@ -1,2 +1,8 @@
+# OS files
+.DS_Store
+
+# vendor
 /vendor/
+
+# composer
 composer.lock
