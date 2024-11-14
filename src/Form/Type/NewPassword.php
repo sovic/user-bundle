@@ -33,6 +33,7 @@ class NewPassword extends AbstractType
                         'label' => 'user.new_password.form.password',
                         'attr' => [
                             'placeholder' => 'user.new_password.form.password',
+                            'autocomplete' => 'new-password',
                         ],
                         'row_attr' => [
                             'class' => 'mb-3',
