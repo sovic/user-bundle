@@ -80,6 +80,7 @@ class User implements UserInterface, UserEntityInterface, PasswordAuthenticatedU
     #[Column(name: "forgot_password_code", type: Types::STRING, length: 32, unique: true, nullable: true, options: ["default" => null])]
     protected ?string $forgotPasswordCode = null;
 
+    #[Column(type: Types::JSON, nullable: false, options: ["default" => '[]'])]
     protected array $roles = [];
 
     /**

@@ -46,13 +46,19 @@ final class AssignRole extends Command
         if (null === $role) {
             $question = new ChoiceQuestion(
                 'Please select role you want to assign to [' . $user->entity->getEmail() . ']: ',
-                ['admin'], // TODO
+                ['ROLE_ADMIN'],
                 0
             );
             $question->setErrorMessage('Invalid role: %s.');
             $question->setMaxAttempts(3);
             $role = $helper->ask($input, $output, $question);
         }
+
+//        $roles = $user->entity->getRoles();
+//        $roles[] = $role;
+//        $user->entity->setRoles(array_unique($roles));
+//        $user->getEntityManager()->persist($user->entity);
+//        $user->getEntityManager()->flush();
 
         $urm = new UserRoleManager($user);
         if ($urm->addRole($role) === false) {
