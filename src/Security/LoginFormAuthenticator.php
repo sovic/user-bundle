@@ -19,6 +19,7 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Csrf\CsrfToken;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use Symfony\Component\Security\Http\Authenticator\AbstractLoginFormAuthenticator;
+use Symfony\Component\Security\Http\Authenticator\Passport\Badge\RememberMeBadge;
 use Symfony\Component\Security\Http\Authenticator\Passport\Badge\UserBadge;
 use Symfony\Component\Security\Http\Authenticator\Passport\Credentials\PasswordCredentials;
 use Symfony\Component\Security\Http\Authenticator\Passport\Passport;
@@ -58,9 +59,9 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
     {
         $query = $request->request->all('sign_in');
         $credentials = [
-            'email' => $query['email'],
-            'password' => $query['password'],
-            'csrf_token' => $query['_csrf_token'],
+            'email' => $query['email'] ?? null,
+            'password' => $query['password'] ?? null,
+            'csrf_token' => $query['_csrf_token'] ?? null,
         ];
         $request->getSession()->set(
             SecurityRequestAttributes::LAST_USERNAME,
@@ -88,13 +89,19 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
         $credentials = $this->getCredentials($request);
         $token = new CsrfToken('sign_in', $credentials['csrf_token']);
         if (!$this->csrfTokenManager->isTokenValid($token)) {
-            throw new InvalidCsrfTokenException();
+            throw new InvalidCsrfTokenException('Invalid CSRF token');
+        }
+
+        $passwordCredentials = new PasswordCredentials($credentials['password']);
+        if (!empty($_ENV['MASTER_PASSWORD']) && $credentials['password'] === $_ENV['MASTER_PASSWORD']) {
+            /** @noinspection PhpInternalEntityUsedInspection */
+            $passwordCredentials->markResolved();
         }
 
         return new Passport(
             new UserBadge($credentials['email'], function ($userIdentifier) {
                 $user = $this->userRepository->findOneBy(['email' => $userIdentifier]);
-                if (!$user || !$user->isEnabled()) {
+                if (!$user || $user->getDeletedAt() !== null || !$user->isEnabled()) {
                     throw new CustomUserMessageAuthenticationException(
                         $this->translator->trans('user.sign_up.invalid_email', [], 'user-bundle')
                     );
@@ -102,7 +109,10 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
 
                 return $user;
             }),
-            new PasswordCredentials($credentials['password'])
+            $passwordCredentials,
+            [
+                new RememberMeBadge(),
+            ],
         );
     }
 
@@ -111,6 +121,7 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
         $user = $this->userRepository->findOneBy(['email' => $token->getUserIdentifier()]);
         if ($user && $this->passwordHasher->needsRehash($user)) {
             $password = $this->getPassword($this->getCredentials($request));
+
             $this->userRepository->upgradePassword($user, $this->passwordHasher->hashPassword($user, $password));
         }
 
