@@ -10,6 +10,7 @@ use Doctrine\ORM\Mapping\Id;
 use Doctrine\ORM\Mapping\MappedSuperclass;
 use Sovic\Common\Entity\Trait\CreatedAtTrait;
 use Sovic\Common\Entity\Trait\DeletedAtTrait;
+use Sovic\Common\Entity\Trait\UpdatedAtTrait;
 use Sovic\Common\Enum\CountryId;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -23,6 +24,7 @@ class User implements UserInterface, UserEntityInterface, PasswordAuthenticatedU
     use CreatedAtTrait;
     use CreatorTrait;
     use DeletedAtTrait;
+    use UpdatedAtTrait;
 
     #[Id]
     #[GeneratedValue(strategy: 'AUTO')]
@@ -82,6 +84,13 @@ class User implements UserInterface, UserEntityInterface, PasswordAuthenticatedU
 
     #[Column(type: Types::JSON, nullable: false, options: ["default" => '[]'])]
     protected array $roles = [];
+
+    public function __construct()
+    {
+        $now = new DateTimeImmutable();
+        $this->createdAt = $now;
+        $this->updatedAt = $now;
+    }
 
     /**
      * @see UserInterface
