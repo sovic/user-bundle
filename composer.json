@@ -27,17 +27,17 @@
     "prefer-stable": true,
     "require": {
         "php": "~8.2",
-        "doctrine/orm": "^2.19",
+        "doctrine/orm": "^3.5",
         "doctrine/dbal": "^3.8",
         "sovic/common": "dev-master",
-        "symfony/cache": "^7.0",
-        "symfony/form": "^7.0",
-        "symfony/framework-bundle": "^7.0",
-        "symfony/translation": "^7.0",
-        "symfony/security-bundle": "^7.0",
-        "symfony/mailer": "^7.0",
-        "symfony/twig-bundle": "^7.0",
-        "symfony/twig-bridge": "^7.0",
-        "symfony/validator": "^7.0"
+        "symfony/cache": "^7.3",
+        "symfony/form": "^7.3",
+        "symfony/framework-bundle": "^7.3",
+        "symfony/translation": "^7.3",
+        "symfony/security-bundle": "^7.3",
+        "symfony/mailer": "^7.3",
+        "symfony/twig-bundle": "^7.3",
+        "symfony/twig-bridge": "^7.3",
+        "symfony/validator": "^7.3"
     }
 }
