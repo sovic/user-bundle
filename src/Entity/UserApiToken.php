@@ -7,20 +7,29 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\Id;
+use Doctrine\ORM\Mapping\Index;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\OneToOne;
+use Doctrine\ORM\Mapping\UniqueConstraint;
 use Sovic\Common\Entity\Trait\CreatedAtTrait;
+use Sovic\Common\Entity\Trait\UserAgentTrait;
 use UserBundle\User\UserEntityInterface;
 
+#[Index(name: 'user_id', columns: ['user_id'])]
+#[UniqueConstraint(name: 'token', columns: ['token'])]
 #[Entity]
 class UserApiToken
 {
     use CreatedAtTrait;
+    use UserAgentTrait;
 
     #[Id]
     #[OneToOne(targetEntity: User::class)]
     #[JoinColumn(name: 'user_id', referencedColumnName: 'id', nullable: false, onDelete: 'CASCADE')]
     private UserEntityInterface $user;
+
+    #[Column(name: 'type', type: Types::STRING, length: 100, nullable: true, options: ['default' => null])]
+    private ?string $type = null;
 
     #[Column(type: Types::STRING, length: 255, nullable: false)]
     private string $token;
@@ -36,6 +45,16 @@ class UserApiToken
     public function setUser(UserEntityInterface $user): void
     {
         $this->user = $user;
+    }
+
+    public function getType(): ?string
+    {
+        return $this->type;
+    }
+
+    public function setType(?string $type): void
+    {
+        $this->type = $type;
     }
 
     public function getToken(): string
