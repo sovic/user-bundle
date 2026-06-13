@@ -6,12 +6,12 @@ use DateTimeImmutable;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
-use Doctrine\ORM\Mapping\Id;
 use Doctrine\ORM\Mapping\Index;
 use Doctrine\ORM\Mapping\JoinColumn;
-use Doctrine\ORM\Mapping\OneToOne;
+use Doctrine\ORM\Mapping\ManyToOne;
 use Doctrine\ORM\Mapping\UniqueConstraint;
 use Sovic\Common\Entity\Trait\CreatedAtTrait;
+use Sovic\Common\Entity\Trait\IdentityColumnTrait;
 use Sovic\Common\Entity\Trait\UserAgentTrait;
 use UserBundle\User\UserEntityInterface;
 
@@ -20,11 +20,11 @@ use UserBundle\User\UserEntityInterface;
 #[Entity]
 class UserApiToken
 {
+    use IdentityColumnTrait;
     use CreatedAtTrait;
     use UserAgentTrait;
 
-    #[Id]
-    #[OneToOne(targetEntity: User::class)]
+    #[ManyToOne(targetEntity: User::class)]
     #[JoinColumn(name: 'user_id', referencedColumnName: 'id', nullable: false, onDelete: 'CASCADE')]
     private UserEntityInterface $user;
 
