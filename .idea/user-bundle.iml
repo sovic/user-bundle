@@ -22,6 +22,7 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/giggsey/locale" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/polyfill-php84" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/vstelmakh/url-highlight" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/yaml" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

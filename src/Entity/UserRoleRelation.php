@@ -13,8 +13,8 @@ use UserBundle\User\UserEntityInterface;
 use UserBundle\UserRole\UserRoleEntityInterface;
 
 #[MappedSuperclass]
-#[Index(columns: ['user_id'], name: 'user_id')]
-#[Index(columns: ['role_id'], name: 'role_id')]
+#[Index(name: 'user_id', columns: ['user_id'])]
+#[Index(name: 'role_id', columns: ['role_id'])]
 class UserRoleRelation
 {
     use CreatedAtTrait;
@@ -22,12 +22,12 @@ class UserRoleRelation
 
     #[Id]
     #[ManyToOne(targetEntity: User::class)]
-    #[JoinColumn(name: 'user_id', referencedColumnName: 'id', nullable: false, onDelete: 'CASCADE')]
+    #[JoinColumn(name: 'user_id', referencedColumnName: 'id', onDelete: 'CASCADE')]
     protected UserEntityInterface $user;
 
     #[Id]
     #[ManyToOne(targetEntity: UserRole::class)]
-    #[JoinColumn(name: 'role_id', referencedColumnName: 'id', nullable: false, onDelete: 'CASCADE')]
+    #[JoinColumn(name: 'role_id', referencedColumnName: 'id', onDelete: 'CASCADE')]
     protected UserRoleEntityInterface $role;
 
     public function getUser(): UserEntityInterface
